@@ -74,8 +74,8 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
-        view.frame.origin.y = -200
-        setupAnimateStart()
+       // view.frame.origin.y = -200
+       // setupAnimateStart()
         
         
     }
@@ -113,7 +113,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        animateEnd()
+        //animateEnd()
        
     }
     
