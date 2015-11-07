@@ -7,23 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443D67741BEA934500684AF2 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */; };
+		443D67771BEA973800684AF2 /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D67761BEA973800684AF2 /* RecipeTableViewController.swift */; };
 		4447E9E51BDBD9A80098A63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9E41BDBD9A80098A63C /* AppDelegate.swift */; };
-		4447E9E71BDBD9A80098A63C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9E61BDBD9A80098A63C /* ViewController.swift */; };
 		4447E9EA1BDBD9A80098A63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4447E9E81BDBD9A80098A63C /* Main.storyboard */; };
 		4447E9ED1BDBD9A80098A63C /* Open_Sauce.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9EB1BDBD9A80098A63C /* Open_Sauce.xcdatamodeld */; };
 		4447E9EF1BDBD9A80098A63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4447E9EE1BDBD9A80098A63C /* Assets.xcassets */; };
 		4447E9F21BDBD9A80098A63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4447E9F01BDBD9A80098A63C /* LaunchScreen.storyboard */; };
+		4447E9FC1BDBDF270098A63C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9FB1BDBDF270098A63C /* LoginViewController.swift */; };
+		4447E9FF1BDBFD610098A63C /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9FE1BDBFD610098A63C /* UITextFieldExtensions.swift */; };
+		449B9A391BE1525B00BCBB0E /* OauthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B9A381BE1525B00BCBB0E /* OauthApi.swift */; };
+		44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */; };
+		44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2F1BE520140039BE0F /* OpensauceApi.swift */; };
+		44A95E321BE7F1B70039BE0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E311BE7F1B70039BE0F /* User.swift */; };
+		66742A3D346FB19F6CD841E7 /* Pods_Open_Sauce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.debug.xcconfig"; sourceTree = "<group>"; };
+		443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewCell.swift; sourceTree = "<group>"; };
+		443D67761BEA973800684AF2 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		4447E9E11BDBD9A80098A63C /* Open Sauce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open Sauce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447E9E41BDBD9A80098A63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4447E9E61BDBD9A80098A63C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4447E9E91BDBD9A80098A63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4447E9EC1BDBD9A80098A63C /* Open_Sauce.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Open_Sauce.xcdatamodel; sourceTree = "<group>"; };
 		4447E9EE1BDBD9A80098A63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4447E9F11BDBD9A80098A63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4447E9F31BDBD9A80098A63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4447E9FB1BDBDF270098A63C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4447E9FE1BDBFD610098A63C /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		449B9A381BE1525B00BCBB0E /* OauthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthApi.swift; sourceTree = "<group>"; };
+		44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		44A95E2F1BE520140039BE0F /* OpensauceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensauceApi.swift; sourceTree = "<group>"; };
+		44A95E311BE7F1B70039BE0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.release.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.release.xcconfig"; sourceTree = "<group>"; };
+		FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Open_Sauce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +49,53 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66742A3D346FB19F6CD841E7 /* Pods_Open_Sauce.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		428E2282E550DBFA376AED60 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		443D67711BEA930800684AF2 /* Recipe */ = {
+			isa = PBXGroup;
+			children = (
+				443D67751BEA972300684AF2 /* Controllers */,
+				443D67721BEA931E00684AF2 /* Views */,
+			);
+			name = Recipe;
+			sourceTree = "<group>";
+		};
+		443D67721BEA931E00684AF2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		443D67751BEA972300684AF2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				443D67761BEA973800684AF2 /* RecipeTableViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		4447E9D81BDBD9A80098A63C = {
 			isa = PBXGroup;
 			children = (
 				4447E9E31BDBD9A80098A63C /* Open Sauce */,
 				4447E9E21BDBD9A80098A63C /* Products */,
+				A8A284B4A9A14A8B5ECA7CB1 /* Pods */,
+				428E2282E550DBFA376AED60 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,8 +110,11 @@
 		4447E9E31BDBD9A80098A63C /* Open Sauce */ = {
 			isa = PBXGroup;
 			children = (
+				443D67711BEA930800684AF2 /* Recipe */,
+				449B9A371BE1523F00BCBB0E /* Api */,
+				4447E9FD1BDBFD380098A63C /* Extensions */,
+				4447E9F91BDBDF040098A63C /* Login */,
 				4447E9E41BDBD9A80098A63C /* AppDelegate.swift */,
-				4447E9E61BDBD9A80098A63C /* ViewController.swift */,
 				4447E9E81BDBD9A80098A63C /* Main.storyboard */,
 				4447E9EE1BDBD9A80098A63C /* Assets.xcassets */,
 				4447E9F01BDBD9A80098A63C /* LaunchScreen.storyboard */,
@@ -67,6 +124,58 @@
 			path = "Open Sauce";
 			sourceTree = "<group>";
 		};
+		4447E9F91BDBDF040098A63C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				449B9A341BE151DD00BCBB0E /* Model */,
+				4447E9FA1BDBDF0E0098A63C /* Controllers */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		4447E9FA1BDBDF0E0098A63C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4447E9FB1BDBDF270098A63C /* LoginViewController.swift */,
+				44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4447E9FD1BDBFD380098A63C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4447E9FE1BDBFD610098A63C /* UITextFieldExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		449B9A341BE151DD00BCBB0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44A95E311BE7F1B70039BE0F /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		449B9A371BE1523F00BCBB0E /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				449B9A381BE1525B00BCBB0E /* OauthApi.swift */,
+				44A95E2F1BE520140039BE0F /* OpensauceApi.swift */,
+			);
+			name = Api;
+			sourceTree = "<group>";
+		};
+		A8A284B4A9A14A8B5ECA7CB1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */,
+				C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4447E9F61BDBD9A80098A63C /* Build configuration list for PBXNativeTarget "Open Sauce" */;
 			buildPhases = (
+				EF303F185BAFF41FCE0FAB14 /* Check Pods Manifest.lock */,
 				4447E9DD1BDBD9A80098A63C /* Sources */,
 				4447E9DE1BDBD9A80098A63C /* Frameworks */,
 				4447E9DF1BDBD9A80098A63C /* Resources */,
+				6D3FB9E37985CC11F3E81A5D /* Embed Pods Frameworks */,
+				311E96E3D7F13C6A1D4A5BB0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -99,6 +211,7 @@
 				TargetAttributes = {
 					4447E9E01BDBD9A80098A63C = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = B69U5P3C32;
 					};
 				};
 			};
@@ -133,14 +246,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		311E96E3D7F13C6A1D4A5BB0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D3FB9E37985CC11F3E81A5D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF303F185BAFF41FCE0FAB14 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4447E9DD1BDBD9A80098A63C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4447E9E71BDBD9A80098A63C /* ViewController.swift in Sources */,
+				44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */,
+				449B9A391BE1525B00BCBB0E /* OauthApi.swift in Sources */,
+				4447E9FC1BDBDF270098A63C /* LoginViewController.swift in Sources */,
+				443D67741BEA934500684AF2 /* RecipeListTableViewCell.swift in Sources */,
+				44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */,
+				44A95E321BE7F1B70039BE0F /* User.swift in Sources */,
+				4447E9FF1BDBFD610098A63C /* UITextFieldExtensions.swift in Sources */,
 				4447E9E51BDBD9A80098A63C /* AppDelegate.swift in Sources */,
 				4447E9ED1BDBD9A80098A63C /* Open_Sauce.xcdatamodeld in Sources */,
+				443D67771BEA973800684AF2 /* RecipeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,23 +419,33 @@
 		};
 		4447E9F71BDBD9A80098A63C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Open Sauce/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iangristock.Open-Sauce";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		4447E9F81BDBD9A80098A63C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Open Sauce/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iangristock.Open-Sauce";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -290,6 +468,7 @@
 				4447E9F81BDBD9A80098A63C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
