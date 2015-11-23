@@ -10,7 +10,15 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class OpensauceApi {
+class OpensauceApi:NSObject {
+    
+    // Session object
+    var session: NSURLSession
+    
+    override init() {
+        session = NSURLSession.sharedSession()
+        super.init()
+    }
     
     func createUser(username: String, password: String, email: String,  success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
         print(username, password, email)
@@ -37,19 +45,20 @@ class OpensauceApi {
         }
     }
     
-    func getRecipes(success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+    func getRecipes(success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
         let url = "\(Constants.URL)/\(Methods.GetRecipes)"
         print(url)
         let token = OauthApi.sharedInstance().getToken()!
         let headers = ["Accept" : "application/json",
                        "Authorization" : "Bearer \(token["access_token"]!)" ]
+        
         Alamofire.request(.GET, url, encoding: .JSON, headers:headers )
             .validate()
             .responseJSON {
                 response in
                 switch response.result {
                 case .Success:
-                    success(response.result.value as! [String:AnyObject])
+                    success(response.result.value!["data"]! as! [[String:AnyObject]])
                 case .Failure:
                     let failureResponse = JSON(data: response.data!)
                     print(failureResponse)
@@ -57,6 +66,49 @@ class OpensauceApi {
                 }
         }
 
+    }
+    
+    func scrapeRecipe(site: String, success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
+    {
+        let url = "\(Constants.URL)/\(Methods.ScrapeRecipe)"
+        print(url)
+        let token = OauthApi.sharedInstance().getToken()!
+        let headers = ["Accept" : "application/json",
+            "Authorization" : "Bearer \(token["access_token"]!)" ]
+        let parameters = ["site" : site]
+        Alamofire.request(.POST, url, encoding: .JSON, headers:headers, parameters:parameters )
+            .validate()
+            .responseJSON {
+                response in
+                switch response.result {
+                case .Success:
+                    success(response.result.value!["data"]! as! [[String:AnyObject]])
+                case .Failure:
+                    let failureResponse = JSON(data: response.data!)
+                    print(failureResponse)
+                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                }
+        }
+
+    }
+    
+    func getImage(imageSrc: String, completionHandler:(Int, NSData) -> (), errorHandler:(String) -> ()) -> NSURLSessionTask {
+        let url = NSURL(string: imageSrc)!
+        
+        let request = NSURLRequest(URL: url)
+        
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            
+            if let _ = downloadError {
+                errorHandler("failed to download image")
+            } else {
+                completionHandler(200, data!)
+            }
+        }
+        
+        task.resume()
+        
+        return task
     }
     
 
@@ -75,11 +127,15 @@ extension OpensauceApi {
     struct Constants {
         
         // URL
-        static let URL : String = "http://192.168.99.100"
+        static let URL : String = "http://178.62.8.180"
     }
     
     struct Methods {
         static let UserCreate: String = "user/create"
         static let GetRecipes: String = "recipes"
+        static let ScrapeRecipe: String = "recipes/scrape"
+    }
+    struct Caches {
+        static let imageCache = ImageCache()
     }
 }

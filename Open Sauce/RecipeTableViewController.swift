@@ -8,16 +8,28 @@
 
 import UIKit
 
-class RecipeTableViewController: UITableViewController {
+class RecipeTableViewController: UIViewController , UITableViewDelegate{
 
-    var recipes: [[String:String]]?
+    var recipes = [Recipe]()
     
+    @IBAction func showMenu(sender: AnyObject) {
+        presentLeftMenuViewController()
+    }
+    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
+        self.navigationController?.navigationBar.translucent = true;
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+
         OpensauceApi.sharedInstance().getRecipes(
             {
                 data in
-                self.recipes = data as! [[String: String]]
+                for recipe :[String:AnyObject] in data {
+                    self.recipes.append(Recipe(dict: recipe))
+                }
+                self.tableView.reloadData()
             },
             failure:{
                 error in
@@ -38,25 +50,43 @@ class RecipeTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return recipes.count
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeListTableViewCell", forIndexPath: indexPath) as! RecipeListTableViewCell
+            cell.recipeTitle?.text = recipes[indexPath.row].title
+            cell.background.image = UIImage(named:"sushi")
+        OpensauceApi.sharedInstance().getImage(recipes[indexPath.row].image_url, completionHandler: {
+            responseCode, data in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let image = UIImage(data: data)
+                OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "\(self.recipes[indexPath.row].id)" )
+                // Assign image to image view of cell
+                cell.background.image = image
+                
+            })
+            }, errorHandler: {
+                error in
+                print(error)
+        });
+            cell.serves.text = recipes[indexPath.row].serves
+            cell.difficulty.text = recipes[indexPath.row].difficulty
+            cell.duration.text = recipes[indexPath.row].duration
+        //cell.profilePic.image = UIImage(named:"sushi")
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -102,5 +132,17 @@ class RecipeTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        
+        if (segue.identifier == "showRecipe") {
+            
+            // initialize new view controller and cast it as your view controller
+            var viewController = segue.destinationViewController as! RecipeDetailViewController
+            // your new view controller should have property that will store passed value
+            let selectedRow = tableView.indexPathForSelectedRow!.row
+            viewController.recipe = recipes[selectedRow]
+        }
+        
+    }
 }

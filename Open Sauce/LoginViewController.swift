@@ -14,30 +14,69 @@ class LoginViewController: UIViewController {
     let inputColor = UIColor(red: 207.0/255.0, green: 207.0/255.0, blue: 207.0/255.0, alpha: 0.3)
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var textInputConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var passwordInputConstraint: NSLayoutConstraint!
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+       // view.frame.origin.y = -200
+       // setupAnimateStart()
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if(OauthApi.sharedInstance().hasToken()) {
+            print("has token")
+            performSegueWithIdentifier("loginSuccess", sender: nil)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.hidden = true
+        modalTransitionStyle = .FlipHorizontal
+        
+        // Do any additional setup after loading the view.
+
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
+    
+    
     @IBOutlet weak var emailTextInput: UITextField! {
         didSet {
             emailTextInput.delegate = self
-            emailTextInput.setStyleAndPadding(1, borderColor: inputColor, padding: 15.00, radius: 5, placeHolder: "Email address")
+            emailTextInput.setTextLeftPadding(35.0)
+            let placeholder = NSAttributedString(string:  "Email address", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+            emailTextInput.attributedPlaceholder = placeholder
+          //  emailTextInput.setStyleAndPadding(1, padding: 25.00, radius: 5, placeHolder: "Email address")
         }
     }
     @IBOutlet weak var passwordTextInput: UITextField! {
         didSet {
             passwordTextInput.delegate = self
-            passwordTextInput.setStyleAndPadding(2, borderColor: inputColor, padding: 15.00, radius: 5, placeHolder: "Password")
+            passwordTextInput.setTextLeftPadding(35.0)
+            let placeholder = NSAttributedString(string:  "Password", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+            passwordTextInput.attributedPlaceholder = placeholder
+          //  passwordTextInput.setStyleAndPadding(2, borderColor: inputColor, padding: 15.00, radius: 5, placeHolder: "Password")
         }
     }
-    @IBOutlet weak var textInputConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var registerButton: UIButton!
     @IBAction func registerClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("showRegistration", sender:self)
     }
-    
     
     @IBAction func loginClicked(sender: AnyObject) {
         activityIndicator.hidden = false
@@ -64,20 +103,39 @@ class LoginViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.hidden = true
             })
-
+            
         }
     }
     
-    @IBOutlet weak var passwordInputConstraint: NSLayoutConstraint!
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        subscribeToKeyboardNotifications()
-       // view.frame.origin.y = -200
-       // setupAnimateStart()
+
+
+    //MARK: keyboard subscriber methods
+    func subscribeToKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if passwordTextInput.isFirstResponder() {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.CGRectValue().height
     }
     
     func setupAnimateStart() {
@@ -110,55 +168,6 @@ class LoginViewController: UIViewController {
             }, completion: { (finished: Bool) in
         })
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        //animateEnd()
-       
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        activityIndicator.hidden = true
-        modalTransitionStyle = .FlipHorizontal
-       
-        let blurEffect = UIBlurEffect(style: .Dark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = backgroundImageView.bounds
-        backgroundImageView.addSubview(blurredEffectView)
-        
-        // Do any additional setup after loading the view.
-
-    }
-
-    //MARK: keyboard subscriber methods
-    func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-        
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-        
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        if passwordTextInput.isFirstResponder() {
-            view.frame.origin.y = -getKeyboardHeight(notification)
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        view.frame.origin.y = 0
-    }
-    
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.CGRectValue().height
-    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -166,52 +175,5 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-extension UIView {
-    /**
-     Set x Position
-     
-     :param: x CGFloat
-     by DaRk-_-D0G
-     */
-    func setX(x:CGFloat) {
-        var frame:CGRect = self.frame
-        frame.origin.x = x
-        self.frame = frame
-    }
-    /**
-     Set y Position
-     
-     :param: y CGFloat
-     by DaRk-_-D0G
-     */
-    func setY(y:CGFloat) {
-        var frame:CGRect = self.frame
-        frame.origin.y = y
-        self.frame = frame
-    }
-    /**
-     Set Width
-     
-     :param: width CGFloat
-     by DaRk-_-D0G
-     */
-    func setWidth(width:CGFloat) {
-        var frame:CGRect = self.frame
-        frame.size.width = width
-        self.frame = frame
-    }
-    /**
-     Set Height
-     
-     :param: height CGFloat
-     by DaRk-_-D0G
-     */
-    func setHeight(height:CGFloat) {
-        var frame:CGRect = self.frame
-        frame.size.height = height
-        self.frame = frame
     }
 }

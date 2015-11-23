@@ -13,10 +13,13 @@ class RecipeListTableViewCell: UITableViewCell {
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var serves: UILabel!
     
+    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var difficulty: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

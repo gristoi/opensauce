@@ -5,6 +5,5 @@ use_frameworks!
 target 'Open Sauce' do
 pod 'Alamofire', '~> 3.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-pod 'IQKeyboardManagerSwift'
 end
 

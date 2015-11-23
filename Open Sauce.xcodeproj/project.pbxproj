@@ -16,10 +16,28 @@
 		4447E9F21BDBD9A80098A63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4447E9F01BDBD9A80098A63C /* LaunchScreen.storyboard */; };
 		4447E9FC1BDBDF270098A63C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9FB1BDBDF270098A63C /* LoginViewController.swift */; };
 		4447E9FF1BDBFD610098A63C /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9FE1BDBFD610098A63C /* UITextFieldExtensions.swift */; };
+		4452F0191BF88EF3003C3141 /* Lato-Bla.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0111BF88EF3003C3141 /* Lato-Bla.ttf */; };
+		4452F01A1BF88EF3003C3141 /* Lato-BlaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0121BF88EF3003C3141 /* Lato-BlaIta.ttf */; };
+		4452F01B1BF88EF3003C3141 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0131BF88EF3003C3141 /* Lato-Bol.ttf */; };
+		4452F01C1BF88EF3003C3141 /* Lato-BolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0141BF88EF3003C3141 /* Lato-BolIta.ttf */; };
+		4452F01D1BF88EF3003C3141 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0151BF88EF3003C3141 /* Lato-Lig.ttf */; };
+		4452F01E1BF88EF3003C3141 /* Lato-LigIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0161BF88EF3003C3141 /* Lato-LigIta.ttf */; };
+		4452F01F1BF88EF3003C3141 /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0171BF88EF3003C3141 /* Lato-Reg.ttf */; };
+		4452F0201BF88EF3003C3141 /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0181BF88EF3003C3141 /* Lato-RegIta.ttf */; };
 		449B9A391BE1525B00BCBB0E /* OauthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B9A381BE1525B00BCBB0E /* OauthApi.swift */; };
 		44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */; };
 		44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2F1BE520140039BE0F /* OpensauceApi.swift */; };
 		44A95E321BE7F1B70039BE0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E311BE7F1B70039BE0F /* User.swift */; };
+		44BD117D1BFE64B1005A9D02 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */; };
+		44CEB2341C01D6A1002C7306 /* RecipeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */; };
+		44CEB2381C038F0B002C7306 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2371C038F0B002C7306 /* SearchViewController.swift */; };
+		44CEB23A1C0391D1002C7306 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2391C0391D1002C7306 /* SearchResultsViewController.swift */; };
+		44CEB23C1C03A541002C7306 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB23B1C03A541002C7306 /* ImageCache.swift */; };
+		44EC8E811BF12F1C00457B84 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E801BF12F1C00457B84 /* Recipe.swift */; };
+		44EC8E831BF12F2B00457B84 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E821BF12F2B00457B84 /* Ingredient.swift */; };
+		44EC8E851BF12F3600457B84 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E841BF12F3600457B84 /* Step.swift */; };
+		44EC8E881BF23DB100457B84 /* SassSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E871BF23DB100457B84 /* SassSideMenu.swift */; };
+		44EC8E8E1BF2797400457B84 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E8D1BF2797400457B84 /* MenuViewController.swift */; };
 		66742A3D346FB19F6CD841E7 /* Pods_Open_Sauce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,10 +54,28 @@
 		4447E9F31BDBD9A80098A63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4447E9FB1BDBDF270098A63C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4447E9FE1BDBFD610098A63C /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		4452F0111BF88EF3003C3141 /* Lato-Bla.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bla.ttf"; sourceTree = "<group>"; };
+		4452F0121BF88EF3003C3141 /* Lato-BlaIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlaIta.ttf"; sourceTree = "<group>"; };
+		4452F0131BF88EF3003C3141 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
+		4452F0141BF88EF3003C3141 /* Lato-BolIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BolIta.ttf"; sourceTree = "<group>"; };
+		4452F0151BF88EF3003C3141 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
+		4452F0161BF88EF3003C3141 /* Lato-LigIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LigIta.ttf"; sourceTree = "<group>"; };
+		4452F0171BF88EF3003C3141 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
+		4452F0181BF88EF3003C3141 /* Lato-RegIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-RegIta.ttf"; sourceTree = "<group>"; };
 		449B9A381BE1525B00BCBB0E /* OauthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthApi.swift; sourceTree = "<group>"; };
 		44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		44A95E2F1BE520140039BE0F /* OpensauceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensauceApi.swift; sourceTree = "<group>"; };
 		44A95E311BE7F1B70039BE0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailTableViewCell.swift; sourceTree = "<group>"; };
+		44CEB2371C038F0B002C7306 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		44CEB2391C0391D1002C7306 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		44CEB23B1C03A541002C7306 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		44EC8E801BF12F1C00457B84 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		44EC8E821BF12F2B00457B84 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		44EC8E841BF12F3600457B84 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		44EC8E871BF23DB100457B84 /* SassSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SassSideMenu.swift; sourceTree = "<group>"; };
+		44EC8E8D1BF2797400457B84 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.release.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.release.xcconfig"; sourceTree = "<group>"; };
 		FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Open_Sauce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -67,6 +103,7 @@
 		443D67711BEA930800684AF2 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				44EC8E7F1BF12F0900457B84 /* Models */,
 				443D67751BEA972300684AF2 /* Controllers */,
 				443D67721BEA931E00684AF2 /* Views */,
 			);
@@ -77,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */,
+				44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -85,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				443D67761BEA973800684AF2 /* RecipeTableViewController.swift */,
+				44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -110,6 +149,10 @@
 		4447E9E31BDBD9A80098A63C /* Open Sauce */ = {
 			isa = PBXGroup;
 			children = (
+				44CEB2351C038EEA002C7306 /* Search */,
+				4452F0101BF88EDE003C3141 /* Fonts */,
+				44EC8E8B1BF2795600457B84 /* Menu */,
+				44EC8E861BF23D8B00457B84 /* Util */,
 				443D67711BEA930800684AF2 /* Recipe */,
 				449B9A371BE1523F00BCBB0E /* Api */,
 				4447E9FD1BDBFD380098A63C /* Extensions */,
@@ -150,6 +193,21 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		4452F0101BF88EDE003C3141 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4452F0111BF88EF3003C3141 /* Lato-Bla.ttf */,
+				4452F0121BF88EF3003C3141 /* Lato-BlaIta.ttf */,
+				4452F0131BF88EF3003C3141 /* Lato-Bol.ttf */,
+				4452F0141BF88EF3003C3141 /* Lato-BolIta.ttf */,
+				4452F0151BF88EF3003C3141 /* Lato-Lig.ttf */,
+				4452F0161BF88EF3003C3141 /* Lato-LigIta.ttf */,
+				4452F0171BF88EF3003C3141 /* Lato-Reg.ttf */,
+				4452F0181BF88EF3003C3141 /* Lato-RegIta.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		449B9A341BE151DD00BCBB0E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +223,58 @@
 				44A95E2F1BE520140039BE0F /* OpensauceApi.swift */,
 			);
 			name = Api;
+			sourceTree = "<group>";
+		};
+		44CEB2351C038EEA002C7306 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				44CEB2361C038EF1002C7306 /* Controllers */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		44CEB2361C038EF1002C7306 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				44CEB2371C038F0B002C7306 /* SearchViewController.swift */,
+				44CEB2391C0391D1002C7306 /* SearchResultsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		44EC8E7F1BF12F0900457B84 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44EC8E801BF12F1C00457B84 /* Recipe.swift */,
+				44EC8E821BF12F2B00457B84 /* Ingredient.swift */,
+				44EC8E841BF12F3600457B84 /* Step.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		44EC8E861BF23D8B00457B84 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				44EC8E871BF23DB100457B84 /* SassSideMenu.swift */,
+				44CEB23B1C03A541002C7306 /* ImageCache.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		44EC8E8B1BF2795600457B84 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				44EC8E8C1BF2795F00457B84 /* Controllers */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		44EC8E8C1BF2795F00457B84 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				44EC8E8D1BF2797400457B84 /* MenuViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		A8A284B4A9A14A8B5ECA7CB1 /* Pods */ = {
@@ -238,9 +348,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4452F0191BF88EF3003C3141 /* Lato-Bla.ttf in Resources */,
+				4452F01D1BF88EF3003C3141 /* Lato-Lig.ttf in Resources */,
 				4447E9F21BDBD9A80098A63C /* LaunchScreen.storyboard in Resources */,
+				4452F01E1BF88EF3003C3141 /* Lato-LigIta.ttf in Resources */,
+				4452F01C1BF88EF3003C3141 /* Lato-BolIta.ttf in Resources */,
+				4452F01B1BF88EF3003C3141 /* Lato-Bol.ttf in Resources */,
 				4447E9EF1BDBD9A80098A63C /* Assets.xcassets in Resources */,
+				4452F0201BF88EF3003C3141 /* Lato-RegIta.ttf in Resources */,
+				4452F01A1BF88EF3003C3141 /* Lato-BlaIta.ttf in Resources */,
 				4447E9EA1BDBD9A80098A63C /* Main.storyboard in Resources */,
+				4452F01F1BF88EF3003C3141 /* Lato-Reg.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,15 +418,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */,
+				44CEB2341C01D6A1002C7306 /* RecipeDetailTableViewCell.swift in Sources */,
+				44EC8E8E1BF2797400457B84 /* MenuViewController.swift in Sources */,
 				449B9A391BE1525B00BCBB0E /* OauthApi.swift in Sources */,
 				4447E9FC1BDBDF270098A63C /* LoginViewController.swift in Sources */,
+				44CEB23C1C03A541002C7306 /* ImageCache.swift in Sources */,
 				443D67741BEA934500684AF2 /* RecipeListTableViewCell.swift in Sources */,
 				44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */,
 				44A95E321BE7F1B70039BE0F /* User.swift in Sources */,
 				4447E9FF1BDBFD610098A63C /* UITextFieldExtensions.swift in Sources */,
+				44EC8E881BF23DB100457B84 /* SassSideMenu.swift in Sources */,
 				4447E9E51BDBD9A80098A63C /* AppDelegate.swift in Sources */,
+				44BD117D1BFE64B1005A9D02 /* RecipeDetailViewController.swift in Sources */,
+				44CEB23A1C0391D1002C7306 /* SearchResultsViewController.swift in Sources */,
+				44CEB2381C038F0B002C7306 /* SearchViewController.swift in Sources */,
+				44EC8E831BF12F2B00457B84 /* Ingredient.swift in Sources */,
 				4447E9ED1BDBD9A80098A63C /* Open_Sauce.xcdatamodeld in Sources */,
 				443D67771BEA973800684AF2 /* RecipeTableViewController.swift in Sources */,
+				44EC8E851BF12F3600457B84 /* Step.swift in Sources */,
+				44EC8E811BF12F1C00457B84 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

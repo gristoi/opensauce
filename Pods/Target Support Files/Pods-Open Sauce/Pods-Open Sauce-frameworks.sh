@@ -85,11 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Open Sauce/Alamofire.framework"
-  install_framework "Pods-Open Sauce/IQKeyboardManagerSwift.framework"
   install_framework "Pods-Open Sauce/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Open Sauce/Alamofire.framework"
-  install_framework "Pods-Open Sauce/IQKeyboardManagerSwift.framework"
   install_framework "Pods-Open Sauce/SwiftyJSON.framework"
 fi
