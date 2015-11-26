@@ -37,8 +37,10 @@ class OpensauceApi:NSObject {
                 response in
                  switch response.result {
                   case .Success:
+                    
                     success(response.result.value as! [String:AnyObject])
                     case .Failure:
+                        print(response)
                         let failureResponse = JSON(data: response.data!)
                     failure(failureResponse.dictionaryObject as [String:AnyObject]!)
             }
@@ -66,6 +68,51 @@ class OpensauceApi:NSObject {
                 }
         }
 
+    }
+    
+    func getBookmarks(success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+        let url = "\(Constants.URL)/\(Methods.GetBookmarks)"
+        print(url)
+        let token = OauthApi.sharedInstance().getToken()!
+        let headers = ["Accept" : "application/json",
+            "Authorization" : "Bearer \(token["access_token"]!)" ]
+        
+        Alamofire.request(.GET, url, encoding: .JSON, headers:headers )
+            .validate()
+            .responseJSON {
+                response in
+                switch response.result {
+                case .Success:
+                    success(response.result.value!["data"]! as! [[String:AnyObject]])
+                case .Failure:
+                    let failureResponse = JSON(data: response.data!)
+                    print(failureResponse)
+                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                }
+        }
+        
+    }
+    
+    func getSites(success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+        let url = "\(Constants.URL)/\(Methods.GetSites)"
+        let token = OauthApi.sharedInstance().getToken()!
+        let headers = ["Accept" : "application/json",
+            "Authorization" : "Bearer \(token["access_token"]!)" ]
+        
+        Alamofire.request(.GET, url, encoding: .JSON, headers:headers )
+            .validate()
+            .responseJSON {
+                response in
+                switch response.result {
+                case .Success:
+                    success(response.result.value!["data"]! as! [[String:AnyObject]])
+                case .Failure:
+                    let failureResponse = JSON(data: response.data!)
+                    print(failureResponse)
+                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                }
+        }
+        
     }
     
     func scrapeRecipe(site: String, success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
@@ -127,13 +174,15 @@ extension OpensauceApi {
     struct Constants {
         
         // URL
-        static let URL : String = "http://178.62.8.180"
+        static let URL : String = "http://192.168.99.100"
     }
     
     struct Methods {
         static let UserCreate: String = "user/create"
         static let GetRecipes: String = "recipes"
         static let ScrapeRecipe: String = "recipes/scrape"
+        static let GetSites: String = "recipes/sites"
+        static let GetBookmarks: String = "recipes/bookmarks"
     }
     struct Caches {
         static let imageCache = ImageCache()

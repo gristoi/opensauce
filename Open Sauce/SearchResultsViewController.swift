@@ -12,6 +12,7 @@ import WebKit
 class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebViewDelegate {
 
     var url: NSURL!
+    var isSite: Bool = false
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var urlTextField: UITextField!
@@ -21,6 +22,9 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
         webView.delegate = self
         webView.loadRequest(NSURLRequest(URL: url))
         urlTextField.text = url.absoluteString
+        if !isSite {
+            saveButton.enabled = false
+        }
         // Do any additional setup after loading the view.
     }
 

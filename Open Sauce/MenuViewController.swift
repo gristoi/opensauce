@@ -72,9 +72,9 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        let titles: [String] = ["HOME", "EXPLORE", "ADD A RECIPE", "BOOKMARKS"]
+        let titles: [String] = ["EXPLORE","RECIPES","BOOKMARKS", "LOGOUT"]
         
-        let images: [String] = ["envelope", "envelope", "envelope", "envelope"]
+        let images: [String] = ["search", "books", "bookmark", "logout"]
         
         
         cell.backgroundColor = UIColor.clearColor()
@@ -93,16 +93,27 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         switch indexPath.row {
+        
+
         case 0:
-            //var storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            sideMenuViewController?.contentViewController = UINavigationController(rootViewController: storyboard!.instantiateViewControllerWithIdentifier("RecipeTableViewController") as! RecipeTableViewController)
-            sideMenuViewController?.hideMenuViewController()
-            break
-        case 1:
             
             sideMenuViewController?.contentViewController = UINavigationController(rootViewController: storyboard!.instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController)
             sideMenuViewController?.hideMenuViewController()
             break
+        case 1:
+            //var storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            sideMenuViewController?.contentViewController = UINavigationController(rootViewController: storyboard!.instantiateViewControllerWithIdentifier("RecipeTableViewController") as! RecipeTableViewController)
+            sideMenuViewController?.hideMenuViewController()
+            break
+        case 2:
+            
+            sideMenuViewController?.contentViewController = UINavigationController(rootViewController: storyboard!.instantiateViewControllerWithIdentifier("BookmarkTableViewController") as! BookmarkTableViewController)
+            sideMenuViewController?.hideMenuViewController()
+            break
+        case 3:
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.logoutUser()
+            break;
         default:
             break
         }

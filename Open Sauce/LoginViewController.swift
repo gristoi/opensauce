@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidden = true
-        modalTransitionStyle = .FlipHorizontal
+        modalTransitionStyle = .CrossDissolve
         
         // Do any additional setup after loading the view.
 
