@@ -8,26 +8,28 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UICollectionViewDelegate {
+class SearchViewController: UIViewController, UICollectionViewDelegate,  UISearchBarDelegate {
 
     var sites = [Site]()
     var isSite: Bool = false
     
+    @IBOutlet weak var menuLeftBtn: UIBarButtonItem!
+    
+    
+    @IBAction func menuLeftClicked(sender: AnyObject) {
+        presentLeftMenuViewController()
+    }
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBAction func searchBtn(sender: AnyObject) {
-        let search = searchBar.text
-        let url = NSURL(string: "http://www.google.com/search?q=\(search!)+site:bbcgoodfood.com")
-        isSite = false
-        performSegueWithIdentifier("showResults", sender: url)
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self;
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
+        self.navigationController?.navigationBar.translucent = false
         OpensauceApi.sharedInstance().getSites(
            {
                 data in
@@ -73,6 +75,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate {
         
     }
 
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        let search = searchBar.text
+        let escapedSearch = search!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        let url = NSURL(string: "http://www.google.com/search?q=\(escapedSearch!)")
+        isSite = false
+        performSegueWithIdentifier("showResults", sender: url)
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sites.count
     }

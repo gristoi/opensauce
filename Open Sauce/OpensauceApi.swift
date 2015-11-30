@@ -63,7 +63,7 @@ class OpensauceApi:NSObject {
                     success(response.result.value!["data"]! as! [[String:AnyObject]])
                 case .Failure:
                     let failureResponse = JSON(data: response.data!)
-                    print(failureResponse)
+                    print(response)
                     failure(failureResponse.dictionaryObject as [String:AnyObject]!)
                 }
         }
@@ -115,7 +115,7 @@ class OpensauceApi:NSObject {
         
     }
     
-    func scrapeRecipe(site: String, success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
+    func scrapeRecipe(site: String, success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
     {
         let url = "\(Constants.URL)/\(Methods.ScrapeRecipe)"
         print(url)
@@ -123,17 +123,18 @@ class OpensauceApi:NSObject {
         let headers = ["Accept" : "application/json",
             "Authorization" : "Bearer \(token["access_token"]!)" ]
         let parameters = ["site" : site]
+        print(parameters)
         Alamofire.request(.POST, url, encoding: .JSON, headers:headers, parameters:parameters )
             .validate()
             .responseJSON {
                 response in
+                print(response)
                 switch response.result {
                 case .Success:
-                    success(response.result.value!["data"]! as! [[String:AnyObject]])
+                   success(response.result.value! as! [String:AnyObject])
+                    
                 case .Failure:
-                    let failureResponse = JSON(data: response.data!)
-                    print(failureResponse)
-                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                    failure(["response": "Cannot save recipe"])
                 }
         }
 
@@ -174,7 +175,7 @@ extension OpensauceApi {
     struct Constants {
         
         // URL
-        static let URL : String = "http://192.168.99.100"
+        static let URL : String = "http://178.62.54.252"
     }
     
     struct Methods {
