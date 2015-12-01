@@ -17,10 +17,6 @@ class SiteCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2;
-        self.imageView.clipsToBounds = true;
-        self.imageView.layer.borderWidth = 1.0;
-        self.imageView.layer.borderColor = UIColor.grayColor().CGColor;
 
     }
 }

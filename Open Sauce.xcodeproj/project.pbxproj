@@ -28,6 +28,7 @@
 		44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */; };
 		44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2F1BE520140039BE0F /* OpensauceApi.swift */; };
 		44A95E321BE7F1B70039BE0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E311BE7F1B70039BE0F /* User.swift */; };
+		44AE1D451C0CDD11003CDACD /* BookmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */; };
 		44BD117D1BFE64B1005A9D02 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */; };
 		44CEB2341C01D6A1002C7306 /* RecipeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */; };
 		44CEB2381C038F0B002C7306 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2371C038F0B002C7306 /* SearchViewController.swift */; };
@@ -44,7 +45,7 @@
 		44EC8E881BF23DB100457B84 /* SassSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E871BF23DB100457B84 /* SassSideMenu.swift */; };
 		44EC8E8E1BF2797400457B84 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E8D1BF2797400457B84 /* MenuViewController.swift */; };
 		44F0F2621C09BD9A003FD185 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0F2611C09BD9A003FD185 /* StartingViewController.swift */; };
-		44F0F2641C09DC26003FD185 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0F2631C09DC26003FD185 /* PopupViewController.swift */; };
+		44F0F2641C09DC26003FD185 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0F2631C09DC26003FD185 /* BookmarkViewController.swift */; };
 		66742A3D346FB19F6CD841E7 /* Pods_Open_Sauce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		44A95E2F1BE520140039BE0F /* OpensauceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensauceApi.swift; sourceTree = "<group>"; };
 		44A95E311BE7F1B70039BE0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		44CEB2371C038F0B002C7306 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +91,7 @@
 		44EC8E871BF23DB100457B84 /* SassSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SassSideMenu.swift; sourceTree = "<group>"; };
 		44EC8E8D1BF2797400457B84 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		44F0F2611C09BD9A003FD185 /* StartingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
-		44F0F2631C09DC26003FD185 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		44F0F2631C09DC26003FD185 /* BookmarkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.release.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.release.xcconfig"; sourceTree = "<group>"; };
 		FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Open_Sauce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -242,9 +244,17 @@
 			name = Api;
 			sourceTree = "<group>";
 		};
+		44AE1D411C0CDAE0003CDACD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		44CEB2351C038EEA002C7306 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				44AE1D411C0CDAE0003CDACD /* Models */,
 				44D0B3441C04EB8700EC68AA /* Views */,
 				44CEB2361C038EF1002C7306 /* Controllers */,
 			);
@@ -256,7 +266,7 @@
 			children = (
 				44CEB2371C038F0B002C7306 /* SearchViewController.swift */,
 				44CEB2391C0391D1002C7306 /* SearchResultsViewController.swift */,
-				44F0F2631C09DC26003FD185 /* PopupViewController.swift */,
+				44F0F2631C09DC26003FD185 /* BookmarkViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -265,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				44D0B3451C04EBBB00EC68AA /* SiteCollectionViewCell.swift */,
+				44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -449,6 +460,7 @@
 				44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */,
 				44CEB2341C01D6A1002C7306 /* RecipeDetailTableViewCell.swift in Sources */,
 				44F0F2621C09BD9A003FD185 /* StartingViewController.swift in Sources */,
+				44AE1D451C0CDD11003CDACD /* BookmarkCollectionViewCell.swift in Sources */,
 				44EC8E8E1BF2797400457B84 /* MenuViewController.swift in Sources */,
 				44D0B3481C05F2C500EC68AA /* BookmarkTableViewController.swift in Sources */,
 				449B9A391BE1525B00BCBB0E /* OauthApi.swift in Sources */,
@@ -469,7 +481,7 @@
 				4447E9ED1BDBD9A80098A63C /* Open_Sauce.xcdatamodeld in Sources */,
 				443D67771BEA973800684AF2 /* RecipeTableViewController.swift in Sources */,
 				44EC8E851BF12F3600457B84 /* Step.swift in Sources */,
-				44F0F2641C09DC26003FD185 /* PopupViewController.swift in Sources */,
+				44F0F2641C09DC26003FD185 /* BookmarkViewController.swift in Sources */,
 				44D0B3431C04E1B500EC68AA /* Site.swift in Sources */,
 				44EC8E811BF12F1C00457B84 /* Recipe.swift in Sources */,
 				44D0B34A1C05F58800EC68AA /* BookmarkTableViewCell.swift in Sources */,

@@ -15,6 +15,13 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     var isSite: Bool = false
     
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var savingLabel: UILabel! {
+        didSet {
+            savingLabel.layer.masksToBounds = true;
+            savingLabel.layer.cornerRadius = 5
+        }
+    }
     @IBOutlet weak var saveButton: UIButton! {
         didSet {
             saveButton.layer.cornerRadius = 5
@@ -27,6 +34,9 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
         webView.delegate = self
         webView.loadRequest(NSURLRequest(URL: url))
         urlTextField.text = url.host
+        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+        activityIndicator.hidden = true
+        savingLabel.hidden = true
         
         // Do any additional setup after loading the view.
     }
@@ -41,9 +51,14 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     }
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
+        activityIndicator.hidden = false
+        savingLabel.hidden = false
         OpensauceApi.sharedInstance().scrapeRecipe((webView.request?.mainDocumentURL?.absoluteString)!,
             success: {
                 data in
+                
+                self.activityIndicator.hidden = true
+                self.savingLabel.hidden = true
                 let alert = UIAlertController(title: NSLocalizedString("Recipe Saved !!", comment: ""), message: NSLocalizedString("Your recipe has been saved successfully.", comment: ""), preferredStyle: .ActionSheet)
                 alert.modalPresentationStyle = .Popover
                 
@@ -61,11 +76,44 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
                 
             }, failure: {
                 error in
+                self.activityIndicator.hidden = true
+                self.savingLabel.hidden = true
+                let alert = UIAlertController(title: NSLocalizedString("Unable to save this recipe", comment: ""), message: NSLocalizedString("Would you like to bookmark this page instead?.", comment: ""), preferredStyle: .ActionSheet)
+                alert.modalPresentationStyle = .Popover
                 
+                let action = UIAlertAction(title: NSLocalizedString("Bookmark It !!", comment: ""), style: .Default) { action in
+                    self.performSegueWithIdentifier("saveBookmark", sender: nil)
+
+                    
+                }
+                
+                let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { action in
+
+                }
+                alert.addAction(action)
+                alert.addAction(cancel)
+                if let presenter = alert.popoverPresentationController {
+                    presenter.sourceView = sender as? UIView
+                    presenter.sourceRect = sender.bounds;
+                }
+                self.presentViewController(alert, animated: true, completion: nil)
                 
         })
         
     }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        
+        if (segue.identifier == "saveBookmark") {
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destinationViewController as! BookmarkViewController
+            // your new view controller should have property that will store passed value
+            viewController.recipeUrl = (webView.request?.mainDocumentURL?.absoluteString)!
+        }
+        
+    }
+
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
    // urlTextField.resignFirstResponder()

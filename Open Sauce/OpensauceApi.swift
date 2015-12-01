@@ -140,6 +140,54 @@ class OpensauceApi:NSObject {
 
     }
     
+    func saveBookmark(site: String, title: String,  image_url: String,  success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
+    {
+        let url = "\(Constants.URL)/\(Methods.PostBookmarks)"
+        let token = OauthApi.sharedInstance().getToken()!
+        let headers = ["Accept" : "application/json",
+            "Authorization" : "Bearer \(token["access_token"]!)" ]
+        let parameters = ["site" : site, "title": title, "image_url": image_url]
+        Alamofire.request(.POST, url, encoding: .JSON, headers:headers, parameters:parameters )
+            .validate()
+            .responseJSON {
+                response in
+                print(response.data)
+                switch response.result {
+                case .Success:
+                    success(response.result.value! as! [String:AnyObject])
+                    
+                case .Failure:
+                    failure(["response": "Cannot save bookmark"])
+                }
+        }
+        
+    }
+    
+    func scrapeBookmarkImages(site: String, success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
+    {
+        let url = "\(Constants.URL)/\(Methods.ScrapeBookmarkImages)"
+        print(url)
+        let token = OauthApi.sharedInstance().getToken()!
+        let headers = ["Accept" : "application/json",
+            "Authorization" : "Bearer \(token["access_token"]!)" ]
+        let parameters = ["site" : site]
+        print(parameters)
+        Alamofire.request(.POST, url, encoding: .JSON, headers:headers, parameters:parameters )
+            .validate()
+            .responseJSON {
+                response in
+                print(response)
+                switch response.result {
+                case .Success:
+                    success(response.result.value! as! [[String:AnyObject]])
+                    
+                case .Failure:
+                    failure(["response": "Cannot save recipe"])
+                }
+        }
+        
+    }
+    
     func getImage(imageSrc: String, completionHandler:(Int, NSData) -> (), errorHandler:(String) -> ()) -> NSURLSessionTask {
         let url = NSURL(string: imageSrc)!
         
@@ -175,7 +223,7 @@ extension OpensauceApi {
     struct Constants {
         
         // URL
-        static let URL : String = "http://178.62.54.252"
+        static let URL : String = "http://192.168.99.100"
     }
     
     struct Methods {
@@ -184,6 +232,8 @@ extension OpensauceApi {
         static let ScrapeRecipe: String = "recipes/scrape"
         static let GetSites: String = "recipes/sites"
         static let GetBookmarks: String = "recipes/bookmarks"
+        static let PostBookmarks: String = "recipes/bookmarks"
+        static let ScrapeBookmarkImages: String = "recipes/scrape/images"
     }
     struct Caches {
         static let imageCache = ImageCache()
