@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
-class RecipeTableViewController: UIViewController , UITableViewDelegate{
+class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetchedResultsControllerDelegate{
+
+    // Keep track of insertions, deletions and updates
+    var insertedIndexPaths: [NSIndexPath]!
+    var deletedIndexPaths: [NSIndexPath]!
+    var updatedIndexPaths: [NSIndexPath]!
 
     var recipes = [Recipe]()
     @IBOutlet weak var tableView: UITableView!
@@ -17,25 +23,82 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate{
         presentLeftMenuViewController()
     }
     
+    //# MARK: - NSFetchedResultsController
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+            managedObjectContext: self.sharedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        return fetchedResultsController
+        
+    }()
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
+    
+
+    
+    func getRecipes() {
+        do {
+            try fetchedResultsController.performFetch()
+            print("herererere")
+        } catch let error as NSError {
+            print(error)
+        }
+        if let foundRecipes = fetchedResultsController.fetchedObjects as? [Recipe] {
+            if foundRecipes.isEmpty {
+                OpensauceApi.sharedInstance().getRecipes(
+                    {
+                        recipes in
+                        print(recipes as [[String:AnyObject]])
+                        for recipe in recipes {
+                            let newRecipe = Recipe(dict:recipe, context:self.sharedContext)
+                            let ingredients = recipe["ingredients"] as! [String:AnyObject]
+                            let ingredientdata = ingredients["data"] as! [[String:AnyObject]]
+                            for ingredient in ingredientdata {
+                                let ing = ingredient as [String: AnyObject]
+                                let id = ing["id"] as! Int
+                                let title = ing["title"] as! String
+                                let _ = Ingredient(id:id, name: title, recipe: newRecipe, context: self.sharedContext )
+                            }
+                            let steps = recipe["steps"] as! [String:AnyObject]
+                            let stepdata = steps["data"] as! [[String:AnyObject]]
+                            for step in stepdata {
+                                let s = step as [String: AnyObject]
+                                let stepId = s["id"] as! Int
+                                let stepTitle = s["title"] as! String
+                                let _ = Step(id:stepId, name: stepTitle, recipe: newRecipe, context: self.sharedContext )
+                            }
+                            CoreDataStackManager.sharedInstance().saveContext()
+                        }
+
+                    },
+                    failure :
+                    {
+                        error in
+                    }
+                    
+                )
+                
+            }
+        }
+    }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        OpensauceApi.sharedInstance().getRecipes(
-            {
-                data in
-                for recipe :[String:AnyObject] in data {
-                    self.recipes.append(Recipe(dict: recipe))
-                }
-                self.tableView.reloadData()
-            },
-            failure:{
-                error in
-                print(error)
-        })
-
+        getRecipes()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -57,19 +120,24 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate{
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return recipes.count
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeListTableViewCell", forIndexPath: indexPath) as! RecipeListTableViewCell
-            cell.recipeTitle?.text = recipes[indexPath.row].title
+        
+        
+        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+            cell.recipeTitle?.text = recipe.title
             cell.background.image = UIImage(named:"sushi")
-        OpensauceApi.sharedInstance().getImage(recipes[indexPath.row].image_url, completionHandler: {
+        
+        
+        OpensauceApi.sharedInstance().getImage(recipe.image_url, completionHandler: {
             responseCode, data in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 let image = UIImage(data: data)
-                OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "\(self.recipes[indexPath.row].id)" )
+                OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "recipe-\(recipe.id)" )
                 // Assign image to image view of cell
                 cell.background.image = image
                 
@@ -78,9 +146,9 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate{
                 error in
                 print(error)
         });
-            cell.serves.text = recipes[indexPath.row].serves
-            cell.difficulty.text = recipes[indexPath.row].difficulty
-            cell.duration.text = recipes[indexPath.row].duration
+            cell.serves.text = recipe.serves
+            cell.difficulty.text = recipe.difficulty
+            cell.duration.text = recipe.duration
         //cell.profilePic.image = UIImage(named:"sushi")
         // Configure the cell...
 
@@ -94,8 +162,9 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate{
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destinationViewController as! RecipeDetailViewController
             // your new view controller should have property that will store passed value
-            let selectedRow = tableView.indexPathForSelectedRow!.row
-            viewController.recipe = recipes[selectedRow]
+            let selectedRow = tableView.indexPathForSelectedRow!
+            let recipe = fetchedResultsController.objectAtIndexPath(selectedRow) as! Recipe
+            viewController.recipe = recipe
         }
         
     }

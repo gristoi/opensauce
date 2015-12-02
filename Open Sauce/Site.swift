@@ -7,18 +7,28 @@
 //
 
 import Foundation
+import CoreData
 
-class Site: NSObject {
+class Site:  NSManagedObject {
     
-    var id:Int
-    var host: String
-    var name:String
-    var img_src: String
+   @NSManaged var id:NSNumber
+   @NSManaged var host: String
+   @NSManaged var name:String
+   @NSManaged var img_src: String
     
-    init(dict:[String:AnyObject]) {
-        self.id = dict["id"] as! Int
-        self.name = dict["name"] as! String
-        self.host = dict["host"] as! String
-        self.img_src = dict["img_src"] as! String
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+    
+    init(dict:[String:AnyObject], context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entityForName("Site", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        let theID = dict["id"] as! NSNumber
+        name = dict["name"] as! String
+        host = dict["host"] as! String
+        img_src = dict["img_src"] as! String
+        id = Int(theID)
+        try! context.save()
+
     }
 }

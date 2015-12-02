@@ -59,8 +59,8 @@ class OpensauceApi:NSObject {
             .responseJSON {
                 response in
                 switch response.result {
-                case .Success:
-                    success(response.result.value!["data"]! as! [[String:AnyObject]])
+                case .Success(let JSON):
+                    success(JSON["data"] as! [[String:AnyObject]])
                 case .Failure:
                     let failureResponse = JSON(data: response.data!)
                     print(response)

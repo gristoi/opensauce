@@ -7,14 +7,23 @@
 //
 
 import Foundation
+import CoreData
 
-class Step: NSObject {
+class Step: NSManagedObject {
     
-    var id:Int
-    var name:String
+    @NSManaged var id: NSNumber
+    @NSManaged var name: String
+    @NSManaged var recipe: Recipe
+
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
     
-    init(id: Int, name: String) {
-        self.id = id
+    init(id: Int, name: String, recipe: Recipe, context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entityForName("Step", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        self.id = Int(id as NSNumber)
         self.name = name
+        self.recipe = recipe
     }
 }

@@ -35,8 +35,6 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
         if recipe?.image != nil {
             self.recipeImage.image = recipe!.image
         }
-        // Do any additional setup after loading the view.
-        print(recipe?.steps)
     }
 
     override func didReceiveMemoryWarning() {

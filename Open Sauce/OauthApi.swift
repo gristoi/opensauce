@@ -75,8 +75,5 @@ extension OauthApi {
         static let ClientSecret: String = "51953aa2387722c31d3e9a4dfa53c1834e8d0e52"
         static let GrantType: String = "password"
     }
-    
-    struct Methods {
-        static let Search: String = "flickr.photos.search"
-    }
+
 }

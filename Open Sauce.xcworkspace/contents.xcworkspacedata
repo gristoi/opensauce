@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Open Sauce.xcodeproj">
+      location = "group:/Users/iangristock/udacity/Open Sauce/Fudi.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

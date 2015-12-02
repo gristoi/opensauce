@@ -7,14 +7,24 @@
 //
 
 import Foundation
+import CoreData
 
-class Ingredient: NSObject {
+class Ingredient: NSManagedObject {
     
-    var id:Int
-    var name:String
+    @NSManaged var id:NSNumber
+    @NSManaged var name:String
+    @NSManaged var recipe: Recipe
     
-    init(id: Int, name: String) {
-        self.id = id
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+    
+    init(id: Int, name: String, recipe: Recipe,  context: NSManagedObjectContext) {
+        
+        let entity = NSEntityDescription.entityForName("Ingredient", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        self.id = Int(id as NSNumber)
         self.name = name
+        self.recipe = recipe
     }
 }

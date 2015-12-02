@@ -29,6 +29,7 @@
 		44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2F1BE520140039BE0F /* OpensauceApi.swift */; };
 		44A95E321BE7F1B70039BE0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E311BE7F1B70039BE0F /* User.swift */; };
 		44AE1D451C0CDD11003CDACD /* BookmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */; };
+		44AE1D471C0E1FEA003CDACD /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE1D461C0E1FEA003CDACD /* CoreDataStackManager.swift */; };
 		44BD117D1BFE64B1005A9D02 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */; };
 		44CEB2341C01D6A1002C7306 /* RecipeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */; };
 		44CEB2381C038F0B002C7306 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEB2371C038F0B002C7306 /* SearchViewController.swift */; };
@@ -53,7 +54,7 @@
 		0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.debug.xcconfig"; sourceTree = "<group>"; };
 		443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewCell.swift; sourceTree = "<group>"; };
 		443D67761BEA973800684AF2 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
-		4447E9E11BDBD9A80098A63C /* Open Sauce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open Sauce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4447E9E11BDBD9A80098A63C /* Fudi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fudi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447E9E41BDBD9A80098A63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4447E9E91BDBD9A80098A63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4447E9EC1BDBD9A80098A63C /* Open_Sauce.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Open_Sauce.xcdatamodel; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		44A95E2F1BE520140039BE0F /* OpensauceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensauceApi.swift; sourceTree = "<group>"; };
 		44A95E311BE7F1B70039BE0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewCell.swift; sourceTree = "<group>"; };
+		44AE1D461C0E1FEA003CDACD /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		44BD117C1BFE64B1005A9D02 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		44CEB2331C01D6A1002C7306 /* RecipeDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		44CEB2371C038F0B002C7306 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -159,7 +161,7 @@
 		4447E9E21BDBD9A80098A63C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4447E9E11BDBD9A80098A63C /* Open Sauce.app */,
+				4447E9E11BDBD9A80098A63C /* Fudi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,6 +299,7 @@
 			children = (
 				44EC8E871BF23DB100457B84 /* SassSideMenu.swift */,
 				44CEB23B1C03A541002C7306 /* ImageCache.swift */,
+				44AE1D461C0E1FEA003CDACD /* CoreDataStackManager.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -329,9 +332,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4447E9E01BDBD9A80098A63C /* Open Sauce */ = {
+		4447E9E01BDBD9A80098A63C /* Fudi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4447E9F61BDBD9A80098A63C /* Build configuration list for PBXNativeTarget "Open Sauce" */;
+			buildConfigurationList = 4447E9F61BDBD9A80098A63C /* Build configuration list for PBXNativeTarget "Fudi" */;
 			buildPhases = (
 				EF303F185BAFF41FCE0FAB14 /* Check Pods Manifest.lock */,
 				4447E9DD1BDBD9A80098A63C /* Sources */,
@@ -344,9 +347,9 @@
 			);
 			dependencies = (
 			);
-			name = "Open Sauce";
+			name = Fudi;
 			productName = "Open Sauce";
-			productReference = 4447E9E11BDBD9A80098A63C /* Open Sauce.app */;
+			productReference = 4447E9E11BDBD9A80098A63C /* Fudi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -365,7 +368,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4447E9DC1BDBD9A80098A63C /* Build configuration list for PBXProject "Open Sauce" */;
+			buildConfigurationList = 4447E9DC1BDBD9A80098A63C /* Build configuration list for PBXProject "Fudi" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -378,7 +381,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4447E9E01BDBD9A80098A63C /* Open Sauce */,
+				4447E9E01BDBD9A80098A63C /* Fudi */,
 			);
 		};
 /* End PBXProject section */
@@ -470,6 +473,7 @@
 				44CEB23C1C03A541002C7306 /* ImageCache.swift in Sources */,
 				443D67741BEA934500684AF2 /* RecipeListTableViewCell.swift in Sources */,
 				44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */,
+				44AE1D471C0E1FEA003CDACD /* CoreDataStackManager.swift in Sources */,
 				44A95E321BE7F1B70039BE0F /* User.swift in Sources */,
 				4447E9FF1BDBFD610098A63C /* UITextFieldExtensions.swift in Sources */,
 				44EC8E881BF23DB100457B84 /* SassSideMenu.swift in Sources */,
@@ -603,8 +607,8 @@
 				INFOPLIST_FILE = "Open Sauce/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iangristock.Open-Sauce";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iangristock.fudi;
+				PRODUCT_NAME = Fudi;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -619,8 +623,8 @@
 				INFOPLIST_FILE = "Open Sauce/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iangristock.Open-Sauce";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iangristock.fudi;
+				PRODUCT_NAME = Fudi;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -628,7 +632,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4447E9DC1BDBD9A80098A63C /* Build configuration list for PBXProject "Open Sauce" */ = {
+		4447E9DC1BDBD9A80098A63C /* Build configuration list for PBXProject "Fudi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4447E9F41BDBD9A80098A63C /* Debug */,
@@ -637,7 +641,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4447E9F61BDBD9A80098A63C /* Build configuration list for PBXNativeTarget "Open Sauce" */ = {
+		4447E9F61BDBD9A80098A63C /* Build configuration list for PBXNativeTarget "Fudi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4447E9F71BDBD9A80098A63C /* Debug */,
