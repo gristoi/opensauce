@@ -25,6 +25,8 @@ class Ingredient: NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         self.id = Int(id as NSNumber)
         self.name = name
+        print(recipe)
         self.recipe = recipe
+        try! context.save()
     }
 }

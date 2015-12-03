@@ -19,8 +19,8 @@
         <attribute name="image_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serves" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="ingredients" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient" syncable="YES"/>
-        <relationship name="steps" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="recipe" inverseEntity="Step" syncable="YES"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient" syncable="YES"/>
+        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Step" inverseName="recipe" inverseEntity="Step" syncable="YES"/>
     </entity>
     <entity name="Site" representedClassName=".Site" syncable="YES">
         <attribute name="host" optional="YES" attributeType="String" syncable="YES"/>
@@ -34,9 +34,9 @@
         <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="steps" inverseEntity="Recipe" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Recipe" positionX="-101" positionY="0" width="128" height="165"/>
-        <element name="Ingredient" positionX="-288" positionY="78" width="128" height="90"/>
-        <element name="Step" positionX="-288" positionY="-27" width="128" height="90"/>
+        <element name="Recipe" positionX="-101" positionY="0" width="128" height="163"/>
+        <element name="Ingredient" positionX="-459" positionY="-18" width="128" height="90"/>
+        <element name="Step" positionX="-459" positionY="126" width="128" height="88"/>
         <element name="Site" positionX="-108" positionY="-189" width="128" height="105"/>
         <element name="Bookmark" positionX="-290" positionY="-210" width="128" height="120"/>
     </elements>

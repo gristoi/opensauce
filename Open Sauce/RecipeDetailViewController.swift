@@ -55,9 +55,9 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if(toggle.selectedSegmentIndex == 0 ) {
-            return (recipe?.ingredients.count)!
+            return (recipe!.ingredients?.count)!
         }
-        return (recipe?.steps.count)!
+        return (recipe!.steps!.count)
     }
     
     
@@ -66,12 +66,12 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! RecipeDetailTableViewCell
 
         if(toggle.selectedSegmentIndex == 0 ) {
-            print(recipe?.ingredients[indexPath.row].name)
+            print(recipe?.ingredients![indexPath.row].name)
             cell.stepNumber!.text = "\(indexPath.row + 1)"
-            cell.stepLabel!.text = recipe?.ingredients[indexPath.row].name
+            cell.stepLabel!.text = recipe?.ingredients![indexPath.row].name
                    } else {
             cell.stepNumber!.text = "\(indexPath.row + 1)"
-            cell.stepLabel!.text = recipe?.steps[indexPath.row].name
+            cell.stepLabel!.text = recipe?.steps![indexPath.row].name
             cell.stepLabel.sizeToFit()
 
                     }

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-
+import CoreData
 class OpensauceApi:NSObject {
     
     // Session object
@@ -47,7 +47,7 @@ class OpensauceApi:NSObject {
         }
     }
     
-    func getRecipes(success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+    func getRecipes(context: NSManagedObjectContext, success:([Recipe]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
         let url = "\(Constants.URL)/\(Methods.GetRecipes)"
         print(url)
         let token = OauthApi.sharedInstance().getToken()!
@@ -58,14 +58,42 @@ class OpensauceApi:NSObject {
             .validate()
             .responseJSON {
                 response in
+                dispatch_async(dispatch_get_main_queue(), {
                 switch response.result {
                 case .Success(let JSON):
-                    success(JSON["data"] as! [[String:AnyObject]])
+                    
+                    var recipeArray = [Recipe]()
+                    let recipes = JSON["data"] as! [[String:AnyObject]]
+                    for recipe in recipes {
+                        let newRecipe = Recipe(dict:recipe, context:context)
+                        let ingredients = recipe["ingredients"] as! [String:AnyObject]
+                        let ingredientdata = ingredients["data"] as! [[String:AnyObject]]
+                        for ingredient in ingredientdata {
+                            let ing = ingredient as [String: AnyObject]
+                            let id = ing["id"] as! Int
+                            let title = ing["title"] as! String
+                            let _ = Ingredient(id:id, name: title, recipe: newRecipe, context:context)
+                        }
+                        let steps = recipe["steps"] as! [String:AnyObject]
+                        let stepdata = steps["data"] as! [[String:AnyObject]]
+                        for step in stepdata {
+                            let s = step as [String: AnyObject]
+                            let stepId = s["id"] as! Int
+                            let stepTitle = s["title"] as! String
+                            let _ = Step(id:stepId, name: stepTitle, recipe: newRecipe, context: context)
+                        }
+                        recipeArray.append(newRecipe)
+                        success(recipeArray)
+                       
+                    }
+
                 case .Failure:
                     let failureResponse = JSON(data: response.data!)
                     print(response)
                     failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                    
                 }
+                        })
         }
 
     }

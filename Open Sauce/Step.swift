@@ -25,5 +25,6 @@ class Step: NSManagedObject {
         self.id = Int(id as NSNumber)
         self.name = name
         self.recipe = recipe
+        try! context.save()
     }
 }

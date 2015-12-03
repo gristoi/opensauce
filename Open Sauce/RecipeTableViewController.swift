@@ -53,32 +53,13 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
             print(error)
         }
         if let foundRecipes = fetchedResultsController.fetchedObjects as? [Recipe] {
+            print(foundRecipes)
             if foundRecipes.isEmpty {
-                OpensauceApi.sharedInstance().getRecipes(
-                    {
+                OpensauceApi.sharedInstance().getRecipes(self.sharedContext,
+                    success: {
                         recipes in
-                        print(recipes as [[String:AnyObject]])
-                        for recipe in recipes {
-                            let newRecipe = Recipe(dict:recipe, context:self.sharedContext)
-                            let ingredients = recipe["ingredients"] as! [String:AnyObject]
-                            let ingredientdata = ingredients["data"] as! [[String:AnyObject]]
-                            for ingredient in ingredientdata {
-                                let ing = ingredient as [String: AnyObject]
-                                let id = ing["id"] as! Int
-                                let title = ing["title"] as! String
-                                let _ = Ingredient(id:id, name: title, recipe: newRecipe, context: self.sharedContext )
-                            }
-                            let steps = recipe["steps"] as! [String:AnyObject]
-                            let stepdata = steps["data"] as! [[String:AnyObject]]
-                            for step in stepdata {
-                                let s = step as [String: AnyObject]
-                                let stepId = s["id"] as! Int
-                                let stepTitle = s["title"] as! String
-                                let _ = Step(id:stepId, name: stepTitle, recipe: newRecipe, context: self.sharedContext )
-                            }
-                            CoreDataStackManager.sharedInstance().saveContext()
-                        }
-
+                    
+                        
                     },
                     failure :
                     {
@@ -95,6 +76,7 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchedResultsController.delegate = self
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
@@ -128,11 +110,11 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeListTableViewCell", forIndexPath: indexPath) as! RecipeListTableViewCell
         
         
+
         let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
             cell.recipeTitle?.text = recipe.title
             cell.background.image = UIImage(named:"sushi")
-        
-        
+        print(recipe.ingredients)
         OpensauceApi.sharedInstance().getImage(recipe.image_url, completionHandler: {
             responseCode, data in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -162,9 +144,12 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destinationViewController as! RecipeDetailViewController
             // your new view controller should have property that will store passed value
-            let selectedRow = tableView.indexPathForSelectedRow!
-            let recipe = fetchedResultsController.objectAtIndexPath(selectedRow) as! Recipe
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let recipe = fetchedResultsController.objectAtIndexPath(indexPath!) as! Recipe
+            print(recipe)
             viewController.recipe = recipe
+        
         }
         
     }
@@ -177,5 +162,9 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handle delete (by removing the data from your array and updating the tableview)
         }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
     }
 }

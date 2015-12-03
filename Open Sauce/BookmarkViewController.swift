@@ -108,7 +108,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     // MARK: - UICollectionViewDelegate Methods
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let row = images[indexPath.row]
-        selectedImage = row["src"] as! String
+        selectedImage = row["src"] as? String
     }
 
     func verifyUrl (urlString: String?) -> Bool {
