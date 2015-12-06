@@ -8,25 +8,33 @@
 
 import Foundation
 import UIKit
-class Bookmark {
+import CoreData
+class Bookmark: NSManagedObject {
     
-    var id: Int
-    var title: String
-    var originalLink: String
-    var host: String
-    var image_url: String
+    @NSManaged var id: NSNumber
+    @NSManaged var title: String
+    @NSManaged var originalLink: String
+    @NSManaged var host: String
+    @NSManaged var image_url: String
     var image:UIImage?  {
         get {
-            return OpensauceApi.Caches.imageCache.imageWithIdentifier("\(self.id)")
+            return OpensauceApi.Caches.imageCache.imageWithIdentifier("bookmarks-\(self.id)")
         }
     }
     
-    init(dict: [String: AnyObject]) {
-        self.id = dict["id"] as! Int
-        self.title = dict["title"] as! String
-        self.originalLink = dict["original_link"] as! String
-        self.image_url = (dict["img_src"] as? String)!
-        self.host = dict["source"] as! String
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+    
+    init(dict: [String: AnyObject], context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entityForName("Bookmark", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        id = Int(dict["id"] as! NSNumber)
+        title = dict["title"] as! String
+        originalLink = dict["original_link"] as! String
+        image_url = (dict["img_src"] as? String)!
+        host = dict["source"] as! String
+        try! context.save()
     }
     
 }

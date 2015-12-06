@@ -52,7 +52,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate,  UISearc
     func getSites() {
         do {
             try fetchedResultsController.performFetch()
-             print("herererere")
         } catch _ {
             
         }

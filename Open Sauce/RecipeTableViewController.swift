@@ -15,10 +15,10 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
     var insertedIndexPaths: [NSIndexPath]!
     var deletedIndexPaths: [NSIndexPath]!
     var updatedIndexPaths: [NSIndexPath]!
+    var refreshControl:UIRefreshControl!
 
     var recipes = [Recipe]()
     @IBOutlet weak var tableView: UITableView!
-    
     @IBAction func showMenu(sender: AnyObject) {
         presentLeftMenuViewController()
     }
@@ -28,7 +28,7 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
         
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -43,7 +43,7 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
         return CoreDataStackManager.sharedInstance().managedObjectContext!
     }
     
-
+    
     
     func getRecipes() {
         do {
@@ -53,17 +53,21 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
             print(error)
         }
         if let foundRecipes = fetchedResultsController.fetchedObjects as? [Recipe] {
-            print(foundRecipes)
+
             if foundRecipes.isEmpty {
                 OpensauceApi.sharedInstance().getRecipes(self.sharedContext,
                     success: {
                         recipes in
                     
-                        
+                        CoreDataStackManager.sharedInstance().saveContext()
+                        self.refreshControl?.endRefreshing()
+
                     },
                     failure :
                     {
                         error in
+                        self.refreshControl?.endRefreshing()
+
                     }
                     
                 )
@@ -76,22 +80,33 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+        
         fetchedResultsController.delegate = self
+        
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         getRecipes()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+       
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    func refresh(sender:AnyObject)
+    {
+            for recipe in fetchedResultsController.fetchedObjects as! [Recipe] {
+                if recipe.image != nil {
+                    OpensauceApi.Caches.imageCache.storeImage(nil, withIdentifier: "recipe-\(recipe.id)")
+                }
+                self.sharedContext.deleteObject(recipe)
+            }
+            CoreDataStackManager.sharedInstance().saveContext()
+            getRecipes()
+        }
 
     // MARK: - Table view data source
 
@@ -113,8 +128,8 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
 
         let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
             cell.recipeTitle?.text = recipe.title
-            cell.background.image = UIImage(named:"sushi")
-        print(recipe.ingredients)
+            cell.activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+            cell.activityIndicator.startAnimating()
         OpensauceApi.sharedInstance().getImage(recipe.image_url, completionHandler: {
             responseCode, data in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -122,17 +137,18 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
                 OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "recipe-\(recipe.id)" )
                 // Assign image to image view of cell
                 cell.background.image = image
+                cell.activityIndicator.stopAnimating()
+                cell.activityIndicator.hidden = true
                 
             })
             }, errorHandler: {
                 error in
-                print(error)
+                cell.activityIndicator.stopAnimating()
+                cell.activityIndicator.hidden = true
         });
             cell.serves.text = recipe.serves
             cell.difficulty.text = recipe.difficulty
-            cell.duration.text = recipe.duration
-        //cell.profilePic.image = UIImage(named:"sushi")
-        // Configure the cell...
+            cell.duration.text = recipe.duration.isEmpty ? "no duration": recipe.duration
 
         return cell
     }
@@ -147,11 +163,33 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let recipe = fetchedResultsController.objectAtIndexPath(indexPath!) as! Recipe
-            print(recipe)
             viewController.recipe = recipe
         
         }
         
+    }
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        insertedIndexPaths = [NSIndexPath]()
+        deletedIndexPaths = [NSIndexPath]()
+        updatedIndexPaths = [NSIndexPath]()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            insertedIndexPaths.append(newIndexPath!)
+            break
+        case .Delete:
+            deletedIndexPaths.append(indexPath!)
+            break
+        case .Update:
+            updatedIndexPaths.append(indexPath!)
+            break
+        case .Move:
+            print("move")
+            break
+        }
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

@@ -70,7 +70,7 @@ extension OauthApi {
     struct Constants {
         
         // URL
-        static let URL : String = "http://192.168.99.100/oauth/access_token"
+        static let URL : String = "http://178.62.26.224/oauth/access_token"
         static let ClientId: String = "5a85e4c949a366baa97509f306b9d3cdfd21efa8"
         static let ClientSecret: String = "51953aa2387722c31d3e9a4dfa53c1834e8d0e52"
         static let GrantType: String = "password"

@@ -78,12 +78,13 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         cell.backgroundColor = UIColor.clearColor()
-        cell.textLabel?.font = UIFont(name: "Lato", size: 18)
+        cell.textLabel?.font = UIFont(name: "Lato", size: 16)
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel?.text  = titles[indexPath.row]
         cell.selectionStyle = .None
-        cell.imageView?.image = UIImage(named: images[indexPath.row])
-        
+        cell.imageView?.image = imageWithImage(UIImage(named: images[indexPath.row])!, scaledToSize: CGSize(width: 20, height: 20))
+        cell.imageView?.tintColor = UIColor.whiteColor()
+
         
         return cell
     }
@@ -119,6 +120,15 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
+    }
+    
+    func imageWithImage(image:UIImage,scaledToSize newSize:CGSize)->UIImage{
+        
+        UIGraphicsBeginImageContext( newSize )
+        image.drawInRect(CGRect(x: 0,y: 0,width: newSize.width,height: newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage.imageWithRenderingMode(.AlwaysTemplate)
     }
     
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class BookmarkViewController: UIViewController, UICollectionViewDelegate {
 
@@ -16,12 +17,21 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var addATitle: UILabel!
     
-    @IBOutlet weak var bookmarkTitle: UITextField!
+    @IBOutlet weak var bookmarkTitle: UITextField! {
+        didSet {
+            bookmarkTitle.delegate = self
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
+    
     @IBAction func saveBookmarkClicked(sender: UIButton) {
         
-        OpensauceApi.sharedInstance().saveBookmark(recipeUrl, title: bookmarkTitle.text!, image_url: selectedImage!,
+        OpensauceApi.sharedInstance().saveBookmark(recipeUrl, title: bookmarkTitle.text!, image_url: selectedImage!, context: self.sharedContext,
             success: {
                 data in
                 print("success")
@@ -52,12 +62,6 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
                 error in
                 
         })
-    }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBOutlet weak var saveBookmarkButton: UIButton!
@@ -123,4 +127,12 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
         return false
     }
 
+}
+
+extension BookmarkViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

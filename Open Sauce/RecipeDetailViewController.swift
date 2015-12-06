@@ -55,7 +55,7 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if(toggle.selectedSegmentIndex == 0 ) {
-            return (recipe!.ingredients?.count)!
+            return (recipe!.ingredients!.count)
         }
         return (recipe!.steps!.count)
     }

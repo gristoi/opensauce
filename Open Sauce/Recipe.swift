@@ -13,8 +13,8 @@ class Recipe: NSManagedObject {
     
     @NSManaged var id: NSNumber
     @NSManaged var title: String
-    @NSManaged var ingredients:[Ingredient]?
-    @NSManaged var steps: [Step]?
+    @NSManaged var ingredients: NSOrderedSet?
+    @NSManaged var steps:  NSOrderedSet?
     @NSManaged var serves: String
     @NSManaged var difficulty: String
     @NSManaged var duration: String
@@ -38,7 +38,6 @@ class Recipe: NSManagedObject {
         difficulty = dict["difficulty"] as! String
         duration = dict["preparation_time"] as! String
         image_url = (dict["img_src"] as? String)!
-        try! context.save()
     }
     
 }

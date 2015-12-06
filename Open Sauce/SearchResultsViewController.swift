@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import CoreData
 
 class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebViewDelegate,UIPopoverPresentationControllerDelegate {
 
@@ -29,6 +30,20 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     }
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var webView: UIWebView!
+    
+
+    @IBAction func backButtonClicked(sender: AnyObject) {
+        webView.goBack()
+    }
+    
+    @IBAction func forwardButtonClicked(sender: AnyObject) {
+        webView.goForward()
+    }
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.delegate = self
@@ -53,7 +68,7 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
         
         activityIndicator.hidden = false
         savingLabel.hidden = false
-        OpensauceApi.sharedInstance().scrapeRecipe((webView.request?.mainDocumentURL?.absoluteString)!,
+        OpensauceApi.sharedInstance().scrapeRecipe((webView.request?.mainDocumentURL?.absoluteString)!, context: self.sharedContext,
             success: {
                 data in
                 
@@ -122,7 +137,7 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-      //  urlTextField.text = webView.request?.mainDocumentURL?.host
+      urlTextField.text = webView.request?.mainDocumentURL?.host
     }
 
     /*

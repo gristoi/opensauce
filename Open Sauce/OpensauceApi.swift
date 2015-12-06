@@ -83,13 +83,11 @@ class OpensauceApi:NSObject {
                             let _ = Step(id:stepId, name: stepTitle, recipe: newRecipe, context: context)
                         }
                         recipeArray.append(newRecipe)
-                        success(recipeArray)
-                       
+                        
                     }
-
+                    success(recipeArray)
                 case .Failure:
                     let failureResponse = JSON(data: response.data!)
-                    print(response)
                     failure(failureResponse.dictionaryObject as [String:AnyObject]!)
                     
                 }
@@ -98,7 +96,7 @@ class OpensauceApi:NSObject {
 
     }
     
-    func getBookmarks(success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+    func getBookmarks(context: NSManagedObjectContext, success:([Bookmark]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
         let url = "\(Constants.URL)/\(Methods.GetBookmarks)"
         print(url)
         let token = OauthApi.sharedInstance().getToken()!
@@ -110,8 +108,14 @@ class OpensauceApi:NSObject {
             .responseJSON {
                 response in
                 switch response.result {
-                case .Success:
-                    success(response.result.value!["data"]! as! [[String:AnyObject]])
+                case .Success(let JSON):
+                    var bookmarkArray = [Bookmark]()
+                    let bookmarks = JSON["data"] as! [[String:AnyObject]]
+                    for bookmark in bookmarks {
+                        let newBookmark = Bookmark(dict:bookmark, context:context)
+                        bookmarkArray.append(newBookmark)
+                    }
+                    success(bookmarkArray)
                 case .Failure:
                     let failureResponse = JSON(data: response.data!)
                     print(failureResponse)
@@ -143,7 +147,7 @@ class OpensauceApi:NSObject {
         
     }
     
-    func scrapeRecipe(site: String, success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
+    func scrapeRecipe(site: String,context: NSManagedObjectContext, success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
     {
         let url = "\(Constants.URL)/\(Methods.ScrapeRecipe)"
         print(url)
@@ -156,40 +160,69 @@ class OpensauceApi:NSObject {
             .validate()
             .responseJSON {
                 response in
-                print(response)
-                switch response.result {
-                case .Success:
-                   success(response.result.value! as! [String:AnyObject])
-                    
-                case .Failure:
-                    failure(["response": "Cannot save recipe"])
-                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    switch response.result {
+                    case .Success(let JSON):
+                        
+                        
+                        let recipe = JSON as! [String:AnyObject]
+                        
+                            let newRecipe = Recipe(dict:recipe, context:context)
+                            let ingredients = recipe["ingredients"] as! [String:AnyObject]
+                            let ingredientdata = ingredients["data"] as! [[String:AnyObject]]
+                            for ingredient in ingredientdata {
+                                let ing = ingredient as [String: AnyObject]
+                                let id = ing["id"] as! Int
+                                let title = ing["title"] as! String
+                                let _ = Ingredient(id:id, name: title, recipe: newRecipe, context:context)
+                            }
+                            let steps = recipe["steps"] as! [String:AnyObject]
+                            let stepdata = steps["data"] as! [[String:AnyObject]]
+                            for step in stepdata {
+                                let s = step as [String: AnyObject]
+                                let stepId = s["id"] as! Int
+                                let stepTitle = s["title"] as! String
+                                let _ = Step(id:stepId, name: stepTitle, recipe: newRecipe, context: context)
+                            }
+                        
+                        success(["recipe" : recipe])
+                    case .Failure:
+                        failure(["response": "Cannot save bookmark"])
+                        
+                    }
+                })
+
         }
 
     }
     
-    func saveBookmark(site: String, title: String,  image_url: String,  success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
+    func saveBookmark(site: String, title: String,  image_url: String, context: NSManagedObjectContext,   success:(Bookmark) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
     {
         let url = "\(Constants.URL)/\(Methods.PostBookmarks)"
         let token = OauthApi.sharedInstance().getToken()!
         let headers = ["Accept" : "application/json",
             "Authorization" : "Bearer \(token["access_token"]!)" ]
         let parameters = ["site" : site, "title": title, "image_url": image_url]
+        print(parameters)
         Alamofire.request(.POST, url, encoding: .JSON, headers:headers, parameters:parameters )
             .validate()
             .responseJSON {
                 response in
-                print(response.data)
+                dispatch_async(dispatch_get_main_queue(), {
                 switch response.result {
-                case .Success:
-                    success(response.result.value! as! [String:AnyObject])
-                    
-                case .Failure:
-                    failure(["response": "Cannot save bookmark"])
-                }
+                    case .Success(let JSON):
+                        let bookmark = JSON as! [String:AnyObject]
+                        let newBookmark = Bookmark(dict:bookmark, context:context)
+                        success(newBookmark)
+                
+                    case .Failure:
+                        print(response)
+                        failure(["response": "Cannot save bookmark"])
+                    }
+                })
         }
-        
     }
+    
     
     func scrapeBookmarkImages(site: String, success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
     {
@@ -204,7 +237,6 @@ class OpensauceApi:NSObject {
             .validate()
             .responseJSON {
                 response in
-                print(response)
                 switch response.result {
                 case .Success:
                     success(response.result.value! as! [[String:AnyObject]])
@@ -251,7 +283,7 @@ extension OpensauceApi {
     struct Constants {
         
         // URL
-        static let URL : String = "http://192.168.99.100"
+        static let URL : String = "http://178.62.26.224"
     }
     
     struct Methods {
