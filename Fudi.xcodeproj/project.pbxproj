@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BFE68EED6536175C4FF4133 /* Pods_Fudi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B866F82D4DB86C43BE8FE3 /* Pods_Fudi.framework */; };
 		443D67741BEA934500684AF2 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */; };
 		443D67771BEA973800684AF2 /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D67761BEA973800684AF2 /* RecipeTableViewController.swift */; };
 		4447E9E51BDBD9A80098A63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447E9E41BDBD9A80098A63C /* AppDelegate.swift */; };
@@ -49,14 +50,11 @@
 		44EC8E8E1BF2797400457B84 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC8E8D1BF2797400457B84 /* MenuViewController.swift */; };
 		44F0F2621C09BD9A003FD185 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0F2611C09BD9A003FD185 /* StartingViewController.swift */; };
 		44F0F2641C09DC26003FD185 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0F2631C09DC26003FD185 /* BookmarkViewController.swift */; };
-		66742A3D346FB19F6CD841E7 /* Pods_Open_Sauce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.debug.xcconfig"; sourceTree = "<group>"; };
 		443D67731BEA934500684AF2 /* RecipeListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewCell.swift; sourceTree = "<group>"; };
 		443D67761BEA973800684AF2 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
-		4447E9E11BDBD9A80098A63C /* Fudi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fudi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447E9E41BDBD9A80098A63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4447E9E91BDBD9A80098A63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4447E9EC1BDBD9A80098A63C /* Open_Sauce.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Open_Sauce.xcdatamodel; sourceTree = "<group>"; };
@@ -74,6 +72,7 @@
 		4452F0171BF88EF3003C3141 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
 		4452F0181BF88EF3003C3141 /* Lato-RegIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-RegIta.ttf"; sourceTree = "<group>"; };
 		449B9A381BE1525B00BCBB0E /* OauthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthApi.swift; sourceTree = "<group>"; };
+		44A23B101C14B9D200D61904 /* Fudi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fudi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		44A95E2F1BE520140039BE0F /* FudiApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FudiApi.swift; sourceTree = "<group>"; };
 		44A95E311BE7F1B70039BE0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -98,8 +97,9 @@
 		44EC8E8D1BF2797400457B84 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		44F0F2611C09BD9A003FD185 /* StartingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
 		44F0F2631C09DC26003FD185 /* BookmarkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
-		C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Open Sauce.release.xcconfig"; path = "Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce.release.xcconfig"; sourceTree = "<group>"; };
-		FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Open_Sauce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74D21903BDADA29CB613C9E3 /* Pods-Fudi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fudi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fudi/Pods-Fudi.debug.xcconfig"; sourceTree = "<group>"; };
+		B2B866F82D4DB86C43BE8FE3 /* Pods_Fudi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fudi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5A6E412C792E4FBA38EFFCE /* Pods-Fudi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fudi.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fudi/Pods-Fudi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,17 +107,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66742A3D346FB19F6CD841E7 /* Pods_Open_Sauce.framework in Frameworks */,
+				2BFE68EED6536175C4FF4133 /* Pods_Fudi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		428E2282E550DBFA376AED60 /* Frameworks */ = {
+		18358BFA9DF20B959D423867 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FAA230D0D1410589A3BE5B43 /* Pods_Open_Sauce.framework */,
+				B2B866F82D4DB86C43BE8FE3 /* Pods_Fudi.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,18 +157,10 @@
 			isa = PBXGroup;
 			children = (
 				4447E9E31BDBD9A80098A63C /* Fudi */,
-				4447E9E21BDBD9A80098A63C /* Products */,
-				A8A284B4A9A14A8B5ECA7CB1 /* Pods */,
-				428E2282E550DBFA376AED60 /* Frameworks */,
+				721CD32A38BB8BC650E8AC6B /* Pods */,
+				18358BFA9DF20B959D423867 /* Frameworks */,
+				44A23B101C14B9D200D61904 /* Fudi.app */,
 			);
-			sourceTree = "<group>";
-		};
-		4447E9E21BDBD9A80098A63C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4447E9E11BDBD9A80098A63C /* Fudi.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4447E9E31BDBD9A80098A63C /* Fudi */ = {
@@ -327,11 +319,11 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		A8A284B4A9A14A8B5ECA7CB1 /* Pods */ = {
+		721CD32A38BB8BC650E8AC6B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */,
-				C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */,
+				74D21903BDADA29CB613C9E3 /* Pods-Fudi.debug.xcconfig */,
+				C5A6E412C792E4FBA38EFFCE /* Pods-Fudi.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -356,7 +348,7 @@
 			);
 			name = Fudi;
 			productName = "Open Sauce";
-			productReference = 4447E9E11BDBD9A80098A63C /* Fudi.app */;
+			productReference = 44A23B101C14B9D200D61904 /* Fudi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -384,7 +376,7 @@
 				Base,
 			);
 			mainGroup = 4447E9D81BDBD9A80098A63C;
-			productRefGroup = 4447E9E21BDBD9A80098A63C /* Products */;
+			productRefGroup = 4447E9D81BDBD9A80098A63C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -427,7 +419,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fudi/Pods-Fudi-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D3FB9E37985CC11F3E81A5D /* Embed Pods Frameworks */ = {
@@ -442,7 +434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Open Sauce/Pods-Open Sauce-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fudi/Pods-Fudi-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EF303F185BAFF41FCE0FAB14 /* Check Pods Manifest.lock */ = {
@@ -608,7 +600,7 @@
 		};
 		4447E9F71BDBD9A80098A63C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0AEB3050B12278B39EA15457 /* Pods-Open Sauce.debug.xcconfig */;
+			baseConfigurationReference = 74D21903BDADA29CB613C9E3 /* Pods-Fudi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -624,7 +616,7 @@
 		};
 		4447E9F81BDBD9A80098A63C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9D0D504CBCD849CFE1A5350 /* Pods-Open Sauce.release.xcconfig */;
+			baseConfigurationReference = C5A6E412C792E4FBA38EFFCE /* Pods-Fudi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

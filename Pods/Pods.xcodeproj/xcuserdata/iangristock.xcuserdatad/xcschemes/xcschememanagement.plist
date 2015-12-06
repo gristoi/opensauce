@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Open Sauce.xcscheme</key>
+		<key>Pods-Fudi.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,7 +22,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>31081024E7F618DC1DC32A3DBA26209B</key>
+		<key>1F1882B16B08BEF7FB5E2479A45BB34A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BEB993A61850F62D11EC22F1633F1E2D</key>
+		<key>7AA22D14E703820CEC1B33113C1B7819</key>
 		<dict>
 			<key>primary</key>
 			<true/>

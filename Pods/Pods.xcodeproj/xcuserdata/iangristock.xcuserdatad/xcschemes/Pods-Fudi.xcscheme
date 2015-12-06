@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AFB83AB1B4D2864D87A73B4E'
-               BlueprintName = 'Pods-Open Sauce'
+               BlueprintIdentifier = '659243239A07B176F068F975'
+               BlueprintName = 'Pods-Fudi'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_Open_Sauce.framework'>
+               BuildableName = 'Pods_Fudi.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
