@@ -104,7 +104,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="24"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your Favourite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WK8-x2-Wuj">
                                 <rect key="frame" x="129" y="135" width="156" height="22"/>
@@ -1695,6 +1695,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBH-GH-rpn"/>
-        <segue reference="Lcb-hU-ZJS"/>
+        <segue reference="4cd-Q5-nEx"/>
     </inferredMetricsTieBreakers>
 </document>
