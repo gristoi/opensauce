@@ -166,7 +166,19 @@ extension RecipeTableViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        let numRows = fetchedResultsController.fetchedObjects?.count ?? 0
+        
+        if numRows == 0{
+            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            emptyLabel.text = "You currently have no recipes saved"
+            emptyLabel.textAlignment = .Center
+            
+            self.tableView.backgroundView = emptyLabel
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            return 0
+        } else {
+            return numRows
+        }
     }
     
     
