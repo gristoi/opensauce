@@ -66,7 +66,7 @@ class RegistrationViewController: UIViewController {
             
         } else {
 
-        OpensauceApi.sharedInstance().createUser(usernameInput.text!, password: passwordInput.text!, email: emailInput.text!,
+        FudiApi.sharedInstance().createUser(usernameInput.text!, password: passwordInput.text!, email: emailInput.text!,
             success: {
                 data in
                 let alertController = UIAlertController(title: "Successfully registered!!", message: "Thank you for registering. please log in to continue", preferredStyle: .Alert)

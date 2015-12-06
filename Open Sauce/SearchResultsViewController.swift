@@ -68,7 +68,7 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
         
         activityIndicator.hidden = false
         savingLabel.hidden = false
-        OpensauceApi.sharedInstance().scrapeRecipe((webView.request?.mainDocumentURL?.absoluteString)!, context: self.sharedContext,
+        FudiApi.sharedInstance().scrapeRecipe((webView.request?.mainDocumentURL?.absoluteString)!, context: self.sharedContext,
             success: {
                 data in
                 

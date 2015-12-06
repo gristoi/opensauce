@@ -14,10 +14,7 @@ class BookmarkDetailViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var hostName: UITextField!
     @IBOutlet weak var webView: UIWebView!
-
     @IBOutlet weak var host: UITextField!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

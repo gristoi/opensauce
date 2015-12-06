@@ -9,15 +9,13 @@
 import UIKit
 import CoreData
 
-class BookmarkTableViewController: UIViewController, UITableViewDelegate {
+class BookmarkTableViewController: UIViewController {
 
     // Keep track of insertions, deletions and updates
     var insertedIndexPaths: [NSIndexPath]!
     var deletedIndexPaths: [NSIndexPath]!
     var updatedIndexPaths: [NSIndexPath]!
     var refreshControl:UIRefreshControl!
-
-    var bookmarks = [Bookmark]()
     
     @IBAction func showMenu(sender: AnyObject) {
         presentLeftMenuViewController()
@@ -67,7 +65,7 @@ class BookmarkTableViewController: UIViewController, UITableViewDelegate {
     {
         for bookmark in fetchedResultsController.fetchedObjects as! [Bookmark] {
             if bookmark.image != nil {
-                OpensauceApi.Caches.imageCache.storeImage(nil, withIdentifier: "bookmarks-\(bookmark.id)")
+                FudiApi.Caches.imageCache.storeImage(nil, withIdentifier: "bookmarks-\(bookmark.id)")
             }
             self.sharedContext.deleteObject(bookmark)
         }
@@ -85,7 +83,7 @@ class BookmarkTableViewController: UIViewController, UITableViewDelegate {
         if let foundBookmarks = fetchedResultsController.fetchedObjects as? [Bookmark] {
 
             if foundBookmarks.isEmpty {
-                OpensauceApi.sharedInstance().getBookmarks(self.sharedContext,
+                FudiApi.sharedInstance().getBookmarks(self.sharedContext,
                     success: {
                         bookmarks in
                         CoreDataStackManager.sharedInstance().saveContext()
@@ -94,7 +92,6 @@ class BookmarkTableViewController: UIViewController, UITableViewDelegate {
                     failure :
                     {
                         error in
-                        print(error)
                         self.refreshControl?.endRefreshing()
                     }
                     
@@ -103,7 +100,27 @@ class BookmarkTableViewController: UIViewController, UITableViewDelegate {
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
 
+        if (segue.identifier == "showBookmark") {
+            
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destinationViewController as! BookmarkDetailViewController
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let bookmark = fetchedResultsController.objectAtIndexPath(indexPath!) as! Bookmark
+            viewController.url = NSURL(string: bookmark.originalLink)
+
+        }
+        
+    }
+    
+
+}
+
+extension BookmarkTableViewController: UITableViewDelegate {
+    
     
     // MARK: - Table view data source
     
@@ -124,11 +141,11 @@ class BookmarkTableViewController: UIViewController, UITableViewDelegate {
         cell.bookmarkTitle?.text = bookmark.title
         cell.bookmarkSource.text = bookmark.host
         cell.background.image = UIImage(named:"sushi")
-        OpensauceApi.sharedInstance().getImage(bookmark.image_url, completionHandler: {
+        FudiApi.sharedInstance().getImage(bookmark.image_url, completionHandler: {
             responseCode, data in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 let image = UIImage(data: data)
-                OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "\(bookmark.id)" )
+                FudiApi.Caches.imageCache.storeImage(image, withIdentifier: "\(bookmark.id)" )
                 // Assign image to image view of cell
                 cell.background.image = image
                 
@@ -139,22 +156,19 @@ class BookmarkTableViewController: UIViewController, UITableViewDelegate {
         });
         return cell
     }
+   
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-
-        if (segue.identifier == "showBookmark") {
-            
-            // initialize new view controller and cast it as your view controller
-            let viewController = segue.destinationViewController as! BookmarkDetailViewController
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let bookmark = fetchedResultsController.objectAtIndexPath(indexPath!) as! Bookmark
-            viewController.url = NSURL(string: bookmark.originalLink)
-
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            let bookmark = fetchedResultsController.objectAtIndexPath(indexPath) as! Bookmark
+            sharedContext.deleteObject(bookmark)
         }
-        
     }
 }
+
 
 extension BookmarkTableViewController: NSFetchedResultsControllerDelegate{
     

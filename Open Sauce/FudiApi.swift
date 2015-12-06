@@ -10,7 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreData
-class OpensauceApi:NSObject {
+
+class FudiApi:NSObject {
     
     // Session object
     var session: NSURLSession
@@ -268,17 +269,17 @@ class OpensauceApi:NSObject {
     }
     
 
-    class func sharedInstance() -> OpensauceApi {
+    class func sharedInstance() -> FudiApi {
         
         struct Singleton {
-            static var sharedInstance = OpensauceApi()
+            static var sharedInstance = FudiApi()
         }
         
         return Singleton.sharedInstance
     }
 }
 
-extension OpensauceApi {
+extension FudiApi {
     
     struct Constants {
         

@@ -31,7 +31,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     @IBAction func saveBookmarkClicked(sender: UIButton) {
         
-        OpensauceApi.sharedInstance().saveBookmark(recipeUrl, title: bookmarkTitle.text!, image_url: selectedImage!, context: self.sharedContext,
+        FudiApi.sharedInstance().saveBookmark(recipeUrl, title: bookmarkTitle.text!, image_url: selectedImage!, context: self.sharedContext,
             success: {
                 data in
                 print("success")
@@ -47,7 +47,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        OpensauceApi.sharedInstance().scrapeBookmarkImages(recipeUrl,
+        FudiApi.sharedInstance().scrapeBookmarkImages(recipeUrl,
             success: {
                 data in
                 for image:[String:AnyObject] in data {
@@ -81,7 +81,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
         
         // Get reference to PhotoCell object at cell in question
         let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("bookmarkCell", forIndexPath: indexPath) as! BookmarkCollectionViewCell
-        OpensauceApi.sharedInstance().getImage(image["src"] as! String, completionHandler: {
+        FudiApi.sharedInstance().getImage(image["src"] as! String, completionHandler: {
             responseCode, data in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 let image = UIImage(data: data)

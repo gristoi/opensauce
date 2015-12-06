@@ -57,7 +57,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate,  UISearc
         }
         if let foundSites = fetchedResultsController.fetchedObjects as? [Site] {
             if foundSites.isEmpty {
-                OpensauceApi.sharedInstance().getSites(
+                FudiApi.sharedInstance().getSites(
                     {
                         data in
                         dispatch_async(dispatch_get_main_queue(), {
@@ -137,11 +137,11 @@ class SearchViewController: UIViewController, UICollectionViewDelegate,  UISearc
         let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("siteCollectionCell", forIndexPath: indexPath) as! SiteCollectionViewCell
         cell.label.text = site.name
         print(site.name)
-            OpensauceApi.sharedInstance().getImage(site.img_src, completionHandler: {
+            FudiApi.sharedInstance().getImage(site.img_src, completionHandler: {
                 responseCode, data in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     let image = UIImage(data: data)
-                    OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "sites-\(site.id)")
+                    FudiApi.Caches.imageCache.storeImage(image, withIdentifier: "sites-\(site.id)")
                     // Assign image to image view of cell
                     cell.imageView.image = image
                 })

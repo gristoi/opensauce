@@ -26,7 +26,7 @@
 		4452F0201BF88EF3003C3141 /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4452F0181BF88EF3003C3141 /* Lato-RegIta.ttf */; };
 		449B9A391BE1525B00BCBB0E /* OauthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B9A381BE1525B00BCBB0E /* OauthApi.swift */; };
 		44A95E2E1BE4B37A0039BE0F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */; };
-		44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2F1BE520140039BE0F /* OpensauceApi.swift */; };
+		44A95E301BE520140039BE0F /* FudiApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E2F1BE520140039BE0F /* FudiApi.swift */; };
 		44A95E321BE7F1B70039BE0F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A95E311BE7F1B70039BE0F /* User.swift */; };
 		44AE1D451C0CDD11003CDACD /* BookmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */; };
 		44AE1D471C0E1FEA003CDACD /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE1D461C0E1FEA003CDACD /* CoreDataStackManager.swift */; };
@@ -75,7 +75,7 @@
 		4452F0181BF88EF3003C3141 /* Lato-RegIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-RegIta.ttf"; sourceTree = "<group>"; };
 		449B9A381BE1525B00BCBB0E /* OauthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthApi.swift; sourceTree = "<group>"; };
 		44A95E2D1BE4B37A0039BE0F /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		44A95E2F1BE520140039BE0F /* OpensauceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensauceApi.swift; sourceTree = "<group>"; };
+		44A95E2F1BE520140039BE0F /* FudiApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FudiApi.swift; sourceTree = "<group>"; };
 		44A95E311BE7F1B70039BE0F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		44AE1D441C0CDD11003CDACD /* BookmarkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewCell.swift; sourceTree = "<group>"; };
 		44AE1D461C0E1FEA003CDACD /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				449B9A381BE1525B00BCBB0E /* OauthApi.swift */,
-				44A95E2F1BE520140039BE0F /* OpensauceApi.swift */,
+				44A95E2F1BE520140039BE0F /* FudiApi.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -479,7 +479,7 @@
 				44D0B3411C04DF5300EC68AA /* Bookmark.swift in Sources */,
 				44CEB23C1C03A541002C7306 /* ImageCache.swift in Sources */,
 				443D67741BEA934500684AF2 /* RecipeListTableViewCell.swift in Sources */,
-				44A95E301BE520140039BE0F /* OpensauceApi.swift in Sources */,
+				44A95E301BE520140039BE0F /* FudiApi.swift in Sources */,
 				44AE1D471C0E1FEA003CDACD /* CoreDataStackManager.swift in Sources */,
 				44A95E321BE7F1B70039BE0F /* User.swift in Sources */,
 				4447E9FF1BDBFD610098A63C /* UITextFieldExtensions.swift in Sources */,

@@ -21,7 +21,7 @@ class Recipe: NSManagedObject {
     @NSManaged var image_url: String
     var image:UIImage?  {
         get {
-            return OpensauceApi.Caches.imageCache.imageWithIdentifier("recipe-\(self.id)")
+            return FudiApi.Caches.imageCache.imageWithIdentifier("recipe-\(self.id)")
         }
     }
     

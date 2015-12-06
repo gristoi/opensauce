@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetchedResultsControllerDelegate{
+class RecipeTableViewController: UIViewController , NSFetchedResultsControllerDelegate{
 
     // Keep track of insertions, deletions and updates
     var insertedIndexPaths: [NSIndexPath]!
@@ -55,7 +55,7 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
         if let foundRecipes = fetchedResultsController.fetchedObjects as? [Recipe] {
 
             if foundRecipes.isEmpty {
-                OpensauceApi.sharedInstance().getRecipes(self.sharedContext,
+                FudiApi.sharedInstance().getRecipes(self.sharedContext,
                     success: {
                         recipes in
                     
@@ -100,58 +100,13 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
     {
             for recipe in fetchedResultsController.fetchedObjects as! [Recipe] {
                 if recipe.image != nil {
-                    OpensauceApi.Caches.imageCache.storeImage(nil, withIdentifier: "recipe-\(recipe.id)")
+                    FudiApi.Caches.imageCache.storeImage(nil, withIdentifier: "recipe-\(recipe.id)")
                 }
                 self.sharedContext.deleteObject(recipe)
             }
             CoreDataStackManager.sharedInstance().saveContext()
             getRecipes()
         }
-
-    // MARK: - Table view data source
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return fetchedResultsController.fetchedObjects?.count ?? 0
-    }
-
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeListTableViewCell", forIndexPath: indexPath) as! RecipeListTableViewCell
-        
-        
-
-        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
-            cell.recipeTitle?.text = recipe.title
-            cell.activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-            cell.activityIndicator.startAnimating()
-        OpensauceApi.sharedInstance().getImage(recipe.image_url, completionHandler: {
-            responseCode, data in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let image = UIImage(data: data)
-                OpensauceApi.Caches.imageCache.storeImage(image, withIdentifier: "recipe-\(recipe.id)" )
-                // Assign image to image view of cell
-                cell.background.image = image
-                cell.activityIndicator.stopAnimating()
-                cell.activityIndicator.hidden = true
-                
-            })
-            }, errorHandler: {
-                error in
-                cell.activityIndicator.stopAnimating()
-                cell.activityIndicator.hidden = true
-        });
-            cell.serves.text = recipe.serves
-            cell.difficulty.text = recipe.difficulty
-            cell.duration.text = recipe.duration.isEmpty ? "no duration": recipe.duration
-
-        return cell
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         
@@ -192,17 +147,69 @@ class RecipeTableViewController: UIViewController , UITableViewDelegate, NSFetch
         }
     }
     
+
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
+    }
+}
+
+extension RecipeTableViewController: UITableViewDelegate {
+    
+    
+    // MARK: - Table view data source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeListTableViewCell", forIndexPath: indexPath) as! RecipeListTableViewCell
+        
+        
+        
+        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+        cell.recipeTitle?.text = recipe.title
+        cell.activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+        cell.activityIndicator.startAnimating()
+        FudiApi.sharedInstance().getImage(recipe.image_url, completionHandler: {
+            responseCode, data in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let image = UIImage(data: data)
+                FudiApi.Caches.imageCache.storeImage(image, withIdentifier: "recipe-\(recipe.id)" )
+                // Assign image to image view of cell
+                cell.background.image = image
+                cell.activityIndicator.stopAnimating()
+                cell.activityIndicator.hidden = true
+                
+            })
+            }, errorHandler: {
+                error in
+                cell.activityIndicator.stopAnimating()
+                cell.activityIndicator.hidden = true
+        });
+        cell.serves.text = recipe.serves
+        cell.difficulty.text = recipe.difficulty
+        cell.duration.text = recipe.duration.isEmpty ? "no duration": recipe.duration
+        
+        return cell
+    }
+    
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+            let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+            sharedContext.deleteObject(recipe)
         }
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.reloadData()
     }
 }
