@@ -5,10 +5,16 @@
 When i started building this app i originally called it opensauce but it eveolved over time into Fud. It is a recipe scrapbook app that allows you to search for recipes and store the ones you like for future use.
 The app is broken into 3 main sections :
 
-###explore
-![Alt text](https://github.com/gristoi/opensauce/walkthrough/search.png "Searching for a recipe")
+###registering
+If this is your first time using the app then you will need to register a new account on the app. to do this you need to click on the register now button on the login page. this will direct you to the register page. Complete your details and submit. You will then be asked to login
 
-From here you can either search for recipes directly using the search bar, of click on one of the collection sites to go to the main recipe sites.
+![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/register.png "Searching for a recipe")
+
+###explore
+From here you can either search for recipes directly using the search bar, or click on one of the collection sites to go to the main recipe sites.
+![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/search.png "Searching for a recipe")
+
+
 
 ###recipes
 from here you can view all of your saved recipes
