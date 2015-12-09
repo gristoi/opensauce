@@ -6,6 +6,8 @@ When i started building this app i originally called it opensauce but it eveolve
 The app is broken into 3 main sections :
 
 ###explore
+![Alt text](https://github.com/gristoi/opensauce/walkthrough/search.png "Searching for a recipe")
+
 From here you can either search for recipes directly using the search bar, of click on one of the collection sites to go to the main recipe sites.
 
 ###recipes
