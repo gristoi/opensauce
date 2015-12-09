@@ -8,13 +8,22 @@ The app is broken into 3 main sections :
 ###registering
 If this is your first time using the app then you will need to register a new account on the app. to do this you need to click on the register now button on the login page. this will direct you to the register page. Complete your details and submit. You will then be asked to login
 
-![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/register.png "Searching for a recipe")
+![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/register.png "Registering")
 
 ###explore
 From here you can either search for recipes directly using the search bar, or click on one of the collection sites to go to the main recipe sites.
+
 ![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/search.png "Searching for a recipe")
 
+###saving a recipe
+When you find a recipe that you like you can tap on the save button on the bottom of the search results window. This will attempt to save the recipe for you, and if it cannot the you will be asked if you want to save it as a bookmark
 
+![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/save.png "Saving a recipe")
+
+###saving a bookmark
+When you select to bookmark your recipe you will be asked to add a title and select an image that relates to your recipe
+
+![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/bookmark.png "Bookmark a recipe")
 
 ###recipes
 from here you can view all of your saved recipes
