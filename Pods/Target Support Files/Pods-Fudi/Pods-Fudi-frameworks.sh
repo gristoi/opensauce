@@ -85,9 +85,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Fudi/Alamofire.framework"
+  install_framework "Pods-Fudi/ReachabilitySwift.framework"
   install_framework "Pods-Fudi/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Fudi/Alamofire.framework"
+  install_framework "Pods-Fudi/ReachabilitySwift.framework"
   install_framework "Pods-Fudi/SwiftyJSON.framework"
 fi

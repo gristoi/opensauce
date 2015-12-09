@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ReachabilitySwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,7 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1F1882B16B08BEF7FB5E2479A45BB34A</key>
+		<key>06ED6FB819376E91F45F67DC5E1D0C90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7AA22D14E703820CEC1B33113C1B7819</key>
+		<key>9F41FFDE26D591AF11C845E27AF6739C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC7460EC3D44C7FC8BB1C00F55596E2C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

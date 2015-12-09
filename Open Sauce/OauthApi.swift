@@ -9,10 +9,19 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import ReachabilitySwift
 
 class OauthApi {
     
+    
     func authenticate(username: String, password: String, success:(Bool) -> () = {_ in}, failure:(String) -> () = {_ in}) {
+        
+        if(!FudiApi.checkNetwork())
+        {
+            failure("There appears to be no nework connection")
+            return
+        }
+        
         let parameters = [
             "username": username,
             "password": password,
@@ -63,6 +72,7 @@ class OauthApi {
         
         return Singleton.sharedInstance
     }
+    
 }
 
 extension OauthApi {

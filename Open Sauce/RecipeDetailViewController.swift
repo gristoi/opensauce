@@ -27,10 +27,10 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        recipeTitleLabel.text = recipe?.title
-        difficulty.text = recipe?.difficulty
-        serves.text = recipe?.serves
-        duration.text = recipe?.duration
+        recipeTitleLabel.text = recipe?.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        difficulty.text = recipe?.difficulty.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        serves.text = recipe?.serves.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        duration.text = recipe?.duration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         if recipe?.image != nil {
             self.recipeImage.image = recipe!.image

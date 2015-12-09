@@ -66,8 +66,14 @@ class RecipeTableViewController: UIViewController , NSFetchedResultsControllerDe
                     failure :
                     {
                         error in
+                        let message = error["Error"] as! String
                         self.refreshControl?.endRefreshing()
-
+                        let alertController = UIAlertController(title: "Error getting recipes", message:message, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                        }
+                        alertController.addAction(OKAction)
+                        self.presentViewController(alertController, animated: true, completion:nil)
+                        
                     }
                     
                 )
@@ -207,9 +213,9 @@ extension RecipeTableViewController: UITableViewDelegate {
                 cell.activityIndicator.stopAnimating()
                 cell.activityIndicator.hidden = true
         });
-        cell.serves.text = recipe.serves
-        cell.difficulty.text = recipe.difficulty
-        cell.duration.text = recipe.duration.isEmpty ? "no duration": recipe.duration
+        cell.serves.text = recipe.serves.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        cell.difficulty.text = recipe.difficulty.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        cell.duration.text = recipe.duration.isEmpty ? "no duration": recipe.duration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         return cell
     }

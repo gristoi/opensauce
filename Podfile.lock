@@ -1,22 +1,30 @@
 PODS:
   - Alamofire (3.1.0)
+  - ReachabilitySwift (2.3)
   - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  ReachabilitySwift:
+    :git: https://github.com/ashleymills/Reachability.swift
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  ReachabilitySwift:
+    :commit: 35aa812197a0f5f964febfe74be6c000edc8f850
+    :git: https://github.com/ashleymills/Reachability.swift
   SwiftyJSON:
     :commit: 61c47231e06301bcd4e0c5d345d5a76cfa759b9a
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 415bd7f56197722978759078486689f7ef913dce
+  ReachabilitySwift: 2ac9df18a443901f06caae38a9f5431219a4c36a
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
 COCOAPODS: 0.39.0

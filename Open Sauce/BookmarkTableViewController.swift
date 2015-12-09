@@ -93,6 +93,13 @@ class BookmarkTableViewController: UIViewController {
                     {
                         error in
                         self.refreshControl?.endRefreshing()
+                        let message = error["Error"] as! String
+                        self.refreshControl?.endRefreshing()
+                        let alertController = UIAlertController(title: "Error getting bookmarks", message:message, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                        }
+                        alertController.addAction(OKAction)
+                        self.presentViewController(alertController, animated: true, completion:nil)
                     }
                     
                 )

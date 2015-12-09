@@ -31,10 +31,18 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     @IBAction func saveBookmarkClicked(sender: UIButton) {
         
+        if bookmarkTitle.text?.isEmpty == true || selectedImage == nil{
+            let alertController = UIAlertController(title: "Please complete the bookmark", message: "Both a title and image must be supplied", preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+            }
+            alertController.addAction(OKAction)
+            self.presentViewController(alertController, animated: true, completion:nil)
+            return
+        }
+        
         FudiApi.sharedInstance().saveBookmark(recipeUrl, title: bookmarkTitle.text!, image_url: selectedImage!, context: self.sharedContext,
             success: {
                 data in
-                print("success")
                 self.dismissViewControllerAnimated(true, completion: nil)
             }, failure: {
                 error in
@@ -113,6 +121,9 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let row = images[indexPath.row]
         selectedImage = row["src"] as? String
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        cell!.layer.borderWidth = 3.0
+        cell!.layer.borderColor = UIColor.whiteColor().CGColor
     }
 
     func verifyUrl (urlString: String?) -> Bool {

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Open Sauce/LoginViewController.swift"
-            timestampString = "469280440.228873"
+            timestampString = "471372298.513361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "LoginViewController"
             landmarkType = "3">
          </BreakpointContent>

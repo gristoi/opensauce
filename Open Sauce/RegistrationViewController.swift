@@ -82,7 +82,8 @@ class RegistrationViewController: UIViewController {
             },
             failure: {
                 error in
-                let alertController = UIAlertController(title: "Could not register", message: "There was an issue registering", preferredStyle: .Alert)
+                let message = error["Error"] as! String
+                let alertController = UIAlertController(title: "Could not register", message: message, preferredStyle: .Alert)
                 let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                 }
                 self.activityIndicator.hidden = true

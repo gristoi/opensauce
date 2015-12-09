@@ -102,6 +102,13 @@ class LoginViewController: UIViewController {
                     error in
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.hidden = true
+                    let alertController = UIAlertController(title: "Unable to authenticate", message: error, preferredStyle: .Alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    }
+                    alertController.addAction(OKAction)
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                    return
+
             })
             
         }

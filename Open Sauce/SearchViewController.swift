@@ -71,6 +71,12 @@ class SearchViewController: UIViewController, UICollectionViewDelegate,  UISearc
                     failure :
                     {
                         error in
+                        let message = error["Error"] as! String
+                        let alertController = UIAlertController(title: "Error getting sites", message:message, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                        }
+                        alertController.addAction(OKAction)
+                        self.presentViewController(alertController, animated: true, completion:nil)
                     }
                     
                 )

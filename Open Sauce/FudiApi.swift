@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreData
+import ReachabilitySwift
 
 class FudiApi:NSObject {
     
@@ -22,7 +23,11 @@ class FudiApi:NSObject {
     }
     
     func createUser(username: String, password: String, email: String,  success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
-        print(username, password, email)
+        if(!FudiApi.checkNetwork())
+        {
+            failure(["Error":"There appears to be no nework connection"])
+            return
+        }
         Alamofire.Manager.sharedInstance.session.configuration
             .HTTPAdditionalHeaders?.updateValue("application/json",
                 forKey: "Accept")
@@ -41,14 +46,18 @@ class FudiApi:NSObject {
                     
                     success(response.result.value as! [String:AnyObject])
                     case .Failure:
-                        print(response)
-                        let failureResponse = JSON(data: response.data!)
-                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                        failure(["Error":"There appears to be no nework connection"])
             }
         }
     }
     
     func getRecipes(context: NSManagedObjectContext, success:([Recipe]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+        
+        if(!FudiApi.checkNetwork())
+        {
+            failure(["Error":"There appears to be no nework connection"])
+            return
+        }
         let url = "\(Constants.URL)/\(Methods.GetRecipes)"
         print(url)
         let token = OauthApi.sharedInstance().getToken()!
@@ -88,16 +97,21 @@ class FudiApi:NSObject {
                     }
                     success(recipeArray)
                 case .Failure:
-                    let failureResponse = JSON(data: response.data!)
-                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                    failure(["Error":"Unable to retrieve recipes"])
                     
                 }
-                        })
+            })
         }
 
     }
     
     func getBookmarks(context: NSManagedObjectContext, success:([Bookmark]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+        
+        if(!FudiApi.checkNetwork())
+        {
+            failure(["Error":"There appears to be no nework connection"])
+            return
+        }
         let url = "\(Constants.URL)/\(Methods.GetBookmarks)"
         print(url)
         let token = OauthApi.sharedInstance().getToken()!
@@ -118,15 +132,20 @@ class FudiApi:NSObject {
                     }
                     success(bookmarkArray)
                 case .Failure:
-                    let failureResponse = JSON(data: response.data!)
-                    print(failureResponse)
-                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                    failure(["Error":"Unable to retrieve bookmarks"])
                 }
         }
         
     }
     
     func getSites(success:([[String:AnyObject]]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in}) {
+        
+        if(!FudiApi.checkNetwork())
+        {
+            failure(["Error":"There appears to be no nework connection"])
+            return
+        }
+        
         let url = "\(Constants.URL)/\(Methods.GetSites)"
         let token = OauthApi.sharedInstance().getToken()!
         let headers = ["Accept" : "application/json",
@@ -140,9 +159,7 @@ class FudiApi:NSObject {
                 case .Success:
                     success(response.result.value!["data"]! as! [[String:AnyObject]])
                 case .Failure:
-                    let failureResponse = JSON(data: response.data!)
-                    print(failureResponse)
-                    failure(failureResponse.dictionaryObject as [String:AnyObject]!)
+                    failure(["Error":"Unable to retrieve sites"])
                 }
         }
         
@@ -150,6 +167,12 @@ class FudiApi:NSObject {
     
     func scrapeRecipe(site: String,context: NSManagedObjectContext, success:([String:AnyObject]) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
     {
+        if(!FudiApi.checkNetwork())
+        {
+            failure(["Error":"There appears to be no nework connection"])
+            return
+        }
+        
         let url = "\(Constants.URL)/\(Methods.ScrapeRecipe)"
         print(url)
         let token = OauthApi.sharedInstance().getToken()!
@@ -188,7 +211,7 @@ class FudiApi:NSObject {
                         
                         success(["recipe" : recipe])
                     case .Failure:
-                        failure(["response": "Cannot save bookmark"])
+                        failure(["Error": "Cannot save bookmark"])
                         
                     }
                 })
@@ -199,12 +222,17 @@ class FudiApi:NSObject {
     
     func saveBookmark(site: String, title: String,  image_url: String, context: NSManagedObjectContext,   success:(Bookmark) -> () = {_ in}, failure:([String:AnyObject]) -> () = {_ in})
     {
+        if(!FudiApi.checkNetwork())
+        {
+            failure(["Error":"There appears to be no nework connection"])
+            return
+        }
+        
         let url = "\(Constants.URL)/\(Methods.PostBookmarks)"
         let token = OauthApi.sharedInstance().getToken()!
         let headers = ["Accept" : "application/json",
             "Authorization" : "Bearer \(token["access_token"]!)" ]
         let parameters = ["site" : site, "title": title, "image_url": image_url]
-        print(parameters)
         Alamofire.request(.POST, url, encoding: .JSON, headers:headers, parameters:parameters )
             .validate()
             .responseJSON {
@@ -218,7 +246,7 @@ class FudiApi:NSObject {
                 
                     case .Failure:
                         print(response)
-                        failure(["response": "Cannot save bookmark"])
+                        failure(["Error": "Cannot save bookmark"])
                     }
                 })
         }
@@ -276,6 +304,21 @@ class FudiApi:NSObject {
         }
         
         return Singleton.sharedInstance
+    }
+    
+    class func checkNetwork() -> Bool {
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            return false
+        }
+        
+        if reachability.currentReachabilityStatus == .NotReachable {
+            return false
+        }
+        return true
     }
 }
 
