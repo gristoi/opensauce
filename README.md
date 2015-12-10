@@ -24,6 +24,8 @@ When you find a recipe that you like you can tap on the save button on the botto
 When you select to bookmark your recipe you will be asked to add a title and select an image that relates to your recipe
 
 ![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/bookmark.png "Bookmark a recipe")
+![searching](https://github.com/gristoi/opensauce/blob/master/walkthrough/openbookmark.png "Bookmark a recipe")
+
 
 ###recipes
 from here you can view all of your saved recipes
