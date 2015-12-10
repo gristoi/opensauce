@@ -278,7 +278,8 @@ class FudiApi:NSObject {
     }
     
     func getImage(imageSrc: String, completionHandler:(Int, NSData) -> (), errorHandler:(String) -> ()) -> NSURLSessionTask {
-        let url = NSURL(string: imageSrc)!
+        print(imageSrc)
+        let url = NSURL(string: imageSrc.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))!
         
         let request = NSURLRequest(URL: url)
         
