@@ -35,7 +35,7 @@ When you select to bookmark your recipe you will be asked to add a title and sel
 
 
 ###recipes
-from here you can view all of your saved recipes
+The recipes list from the main menu will show you all recipes that could be saved from the recipe search. All other recipes that could only be bookmarked will show in the bookmark controller
 
 ###bookmarks
 If the app cannot save the recipe directly it will let you bookmark the page you are on. All of your bookmarks will be saved here for viewing
