@@ -211,7 +211,7 @@ class FudiApi:NSObject {
                         
                         success(["recipe" : recipe])
                     case .Failure:
-                        failure(["Error": "Cannot save bookmark"])
+                        failure(["Error": "Cannot save recipe"])
                         
                     }
                 })

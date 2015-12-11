@@ -93,6 +93,15 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
                 error in
                 self.activityIndicator.hidden = true
                 self.savingLabel.hidden = true
+                let message = error["Error"] as! String
+                if message == "There appears to be no nework connection" {
+                    let alertController = UIAlertController(title: "Error saving recipe, please try again later", message:message, preferredStyle: .Alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                    }
+                    alertController.addAction(OKAction)
+                    self.presentViewController(alertController, animated: true, completion:nil)
+                    return
+                }
                 let alert = UIAlertController(title: NSLocalizedString("Unable to save this recipe", comment: ""), message: NSLocalizedString("Would you like to bookmark this page instead?.", comment: ""), preferredStyle: .ActionSheet)
                 alert.modalPresentationStyle = .Popover
                 
