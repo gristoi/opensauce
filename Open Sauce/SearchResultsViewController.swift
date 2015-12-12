@@ -164,7 +164,7 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     
     func webViewDidStartLoad(webView: UIWebView) {
         webLoadingActivityIndicator.hidden = false
-        webLoadingActivityIndicator.stopAnimating()
+        webLoadingActivityIndicator.startAnimating()
     }
     func webViewDidFinishLoad(webView: UIWebView) {
       urlTextField.text = webView.request?.mainDocumentURL?.host
