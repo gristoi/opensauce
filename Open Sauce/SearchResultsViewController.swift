@@ -15,6 +15,7 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     var url: NSURL!
     var isSite: Bool = false
     
+    @IBOutlet weak var webLoadingActivityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var savingLabel: UILabel! {
@@ -46,13 +47,29 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         webView.delegate = self
-        webView.loadRequest(NSURLRequest(URL: url))
+        
         urlTextField.text = url.host
         activityIndicator.activityIndicatorViewStyle = .WhiteLarge
         activityIndicator.hidden = true
         savingLabel.hidden = true
+        webLoadingActivityIndicator.hidden = true
         
+        if(!FudiApi.checkNetwork())
+        {
+            let alertController = UIAlertController(title: "Network Error", message:"There appears to be no network connection", preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+            }
+            alertController.addAction(OKAction)
+            dispatch_async(dispatch_get_main_queue(), {
+            self.presentViewController(alertController, animated: true, completion:nil)
+                })
+            return
+        }
+
+        
+        webView.loadRequest(NSURLRequest(URL: url))
         // Do any additional setup after loading the view.
     }
 
@@ -145,8 +162,14 @@ class SearchResultsViewController: UIViewController, UITextFieldDelegate, UIWebV
     return false
     }
     
+    func webViewDidStartLoad(webView: UIWebView) {
+        webLoadingActivityIndicator.hidden = false
+        webLoadingActivityIndicator.stopAnimating()
+    }
     func webViewDidFinishLoad(webView: UIWebView) {
       urlTextField.text = webView.request?.mainDocumentURL?.host
+        webLoadingActivityIndicator.stopAnimating()
+        webLoadingActivityIndicator.hidden = true
     }
 
     /*

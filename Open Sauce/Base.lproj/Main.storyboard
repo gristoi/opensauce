@@ -768,6 +768,10 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="caV-li-pwR">
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                                <color key="color" red="0.51372549020000002" green="0.10980392160000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="b2o-r3-SVM">
                                 <rect key="frame" x="189" y="329" width="37" height="37"/>
                             </activityIndicatorView>
@@ -777,6 +781,7 @@
                             <constraint firstItem="82K-U7-SM1" firstAttribute="leading" secondItem="EBz-S2-Olv" secondAttribute="leadingMargin" constant="57" id="3IX-nL-zaK"/>
                             <constraint firstItem="82K-U7-SM1" firstAttribute="top" secondItem="EBz-S2-Olv" secondAttribute="top" constant="324" id="8cx-L7-djN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KUY-w0-Fqy" secondAttribute="trailing" constant="-20" id="CRS-la-R0T"/>
+                            <constraint firstItem="caV-li-pwR" firstAttribute="centerX" secondItem="EBz-S2-Olv" secondAttribute="centerX" id="H5s-nu-NAY"/>
                             <constraint firstItem="b2o-r3-SVM" firstAttribute="top" secondItem="EBz-S2-Olv" secondAttribute="top" constant="329" id="H7E-Ur-yzJ"/>
                             <constraint firstItem="pu2-Nz-Fie" firstAttribute="leading" secondItem="EBz-S2-Olv" secondAttribute="leadingMargin" constant="-20" id="HON-sy-5K3"/>
                             <constraint firstItem="KUY-w0-Fqy" firstAttribute="leading" secondItem="EBz-S2-Olv" secondAttribute="leadingMargin" constant="-20" id="J3X-pa-Jfn"/>
@@ -789,6 +794,7 @@
                             <constraint firstItem="M7i-gq-GCK" firstAttribute="leading" secondItem="EBz-S2-Olv" secondAttribute="leadingMargin" constant="-20" id="fMX-Dk-lTn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="M7i-gq-GCK" secondAttribute="trailing" constant="-20" id="jbr-bT-2Yh"/>
                             <constraint firstItem="f8k-Pg-ZLR" firstAttribute="top" secondItem="M7i-gq-GCK" secondAttribute="bottom" id="mRJ-DL-4NI"/>
+                            <constraint firstItem="caV-li-pwR" firstAttribute="centerY" secondItem="EBz-S2-Olv" secondAttribute="centerY" id="yKV-Gn-E7L"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -798,6 +804,7 @@
                         <outlet property="saveButton" destination="9RE-RK-QNR" id="Sfl-dM-8CY"/>
                         <outlet property="savingLabel" destination="82K-U7-SM1" id="Fqn-Jn-f6L"/>
                         <outlet property="urlTextField" destination="1sX-3y-hcx" id="D7j-aX-ujz"/>
+                        <outlet property="webLoadingActivityIndicator" destination="caV-li-pwR" id="TUu-dc-FXF"/>
                         <outlet property="webView" destination="KUY-w0-Fqy" id="wk3-Em-gul"/>
                         <segue destination="6UD-0C-JZG" kind="presentation" identifier="saveBookmark" id="Ns9-Mc-NUc"/>
                     </connections>
@@ -1506,6 +1513,10 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ODp-gE-nhy"/>
                                 </items>
                             </toolbar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cd1-7Q-vjY">
+                                <rect key="frame" x="290" y="322" width="20" height="20"/>
+                                <color key="color" red="0.51372549020000002" green="0.10980392160000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1517,7 +1528,9 @@
                             <constraint firstItem="9hb-q3-DDF" firstAttribute="leading" secondItem="9US-L7-9HZ" secondAttribute="leading" id="ecP-Zp-TTA"/>
                             <constraint firstItem="9hb-q3-DDF" firstAttribute="bottom" secondItem="eNQ-2y-ZEA" secondAttribute="top" id="ft8-q5-HHK"/>
                             <constraint firstItem="gy7-4b-671" firstAttribute="trailing" secondItem="9hb-q3-DDF" secondAttribute="trailing" id="iaA-RI-2BD"/>
+                            <constraint firstItem="cd1-7Q-vjY" firstAttribute="centerX" secondItem="gy7-4b-671" secondAttribute="centerX" id="j6M-Ml-2fx"/>
                             <constraint firstItem="9hb-q3-DDF" firstAttribute="leading" secondItem="gy7-4b-671" secondAttribute="leading" id="kfg-Lr-4DI"/>
+                            <constraint firstItem="cd1-7Q-vjY" firstAttribute="centerY" secondItem="9hb-q3-DDF" secondAttribute="centerY" id="mmQ-eD-1IM"/>
                             <constraint firstItem="gy7-4b-671" firstAttribute="leading" secondItem="DrD-OM-FCu" secondAttribute="leading" id="vOq-u4-b6D"/>
                         </constraints>
                     </view>
@@ -1526,6 +1539,7 @@
                     <connections>
                         <outlet property="host" destination="NKq-EP-61Q" id="aWF-i3-N0j"/>
                         <outlet property="hostName" destination="ZMC-2t-qYO" id="345-rr-hNV"/>
+                        <outlet property="loadingIndicator" destination="cd1-7Q-vjY" id="lBX-Il-Kos"/>
                         <outlet property="webView" destination="9hb-q3-DDF" id="sYe-Q5-a3E"/>
                     </connections>
                 </viewController>
