@@ -25,23 +25,19 @@ class RecipeListTableViewCell: UITableViewCell {
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
-        let whiteColor = whiteBackgroundView.backgroundColor
         let blackColor = UIColor(red:0/255, green:0/255, blue:0/255, alpha:0.3)
         super.setSelected(selected, animated: animated)
         
         if(selected) {
-            whiteBackgroundView.backgroundColor = whiteColor
             recipeTitle.backgroundColor = blackColor
         }
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
-        let whiteColor = whiteBackgroundView.backgroundColor
         let blackColor = UIColor(red:0/255, green:0/255, blue:0/255, alpha:0.3)
         super.setHighlighted(highlighted, animated: animated)
         
         if(highlighted) {
-            whiteBackgroundView.backgroundColor = whiteColor
             recipeTitle.backgroundColor = blackColor
         }
     }

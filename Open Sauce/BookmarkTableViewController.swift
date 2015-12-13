@@ -16,13 +16,8 @@ class BookmarkTableViewController: UIViewController {
     var deletedIndexPaths: [NSIndexPath]!
     var updatedIndexPaths: [NSIndexPath]!
     var refreshControl:UIRefreshControl!
-    
-    @IBAction func showMenu(sender: AnyObject) {
-        presentLeftMenuViewController()
-    }
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+        
     //# MARK: - NSFetchedResultsController
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
@@ -54,7 +49,7 @@ class BookmarkTableViewController: UIViewController {
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(refreshControl)
+        self.collectionView.addSubview(refreshControl)
         
         fetchedResultsController.delegate = self
         getBookmarks()
@@ -114,8 +109,8 @@ class BookmarkTableViewController: UIViewController {
             
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destinationViewController as! BookmarkDetailViewController
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)
             let bookmark = fetchedResultsController.objectAtIndexPath(indexPath!) as! Bookmark
             viewController.url = NSURL(string: bookmark.originalLink)
 
@@ -125,69 +120,6 @@ class BookmarkTableViewController: UIViewController {
     
 
 }
-
-extension BookmarkTableViewController: UITableViewDelegate {
-    
-    
-    // MARK: - Table view data source
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        let numRows = fetchedResultsController.fetchedObjects?.count ?? 0
-        
-        if numRows == 0{
-            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            emptyLabel.text = "You currently have no bookmarks saved"
-            emptyLabel.textAlignment = .Center
-            
-            self.tableView.backgroundView = emptyLabel
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-            return 0
-        } else {
-            return numRows
-        }
-    }
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as! BookmarkTableViewCell
-        let bookmark = fetchedResultsController.objectAtIndexPath(indexPath) as! Bookmark
-        cell.bookmarkTitle?.text = bookmark.title
-        cell.bookmarkSource.text = bookmark.host
-        cell.background.image = UIImage(named:"sushi")
-        FudiApi.sharedInstance().getImage(bookmark.image_url, completionHandler: {
-            responseCode, data in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let image = UIImage(data: data)
-                FudiApi.Caches.imageCache.storeImage(image, withIdentifier: "\(bookmark.id)" )
-                // Assign image to image view of cell
-                cell.background.image = image
-                
-            })
-            }, errorHandler: {
-                error in
-                print(error)
-        });
-        return cell
-    }
-   
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            let bookmark = fetchedResultsController.objectAtIndexPath(indexPath) as! Bookmark
-            sharedContext.deleteObject(bookmark)
-        }
-    }
-}
-
 
 extension BookmarkTableViewController: NSFetchedResultsControllerDelegate{
     
@@ -216,6 +148,26 @@ extension BookmarkTableViewController: NSFetchedResultsControllerDelegate{
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.reloadData()
+        collectionView.reloadData()
+    }
+}
+
+extension BookmarkTableViewController: UICollectionViewDelegate, UICollectionViewDataSource
+{
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("InspirationCell", forIndexPath: indexPath) as! InspirationCell
+        let bookmark = fetchedResultsController.objectAtIndexPath(indexPath) as! Bookmark
+        
+        cell.bookmark = bookmark
+        return cell
     }
 }

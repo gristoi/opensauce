@@ -19,6 +19,7 @@ class Recipe: NSManagedObject {
     @NSManaged var difficulty: String
     @NSManaged var duration: String
     @NSManaged var image_url: String
+    @NSManaged var source: String
     var image:UIImage?  {
         get {
             return FudiApi.Caches.imageCache.imageWithIdentifier("recipe-\(self.id)")
@@ -38,6 +39,7 @@ class Recipe: NSManagedObject {
         difficulty = dict["difficulty"] as! String
         duration = dict["preparation_time"] as! String
         image_url = (dict["img_src"] as? String)!
+        source = (dict["source"] as? String)!
     }
     
 }

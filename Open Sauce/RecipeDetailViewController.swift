@@ -28,9 +28,6 @@ class RecipeDetailViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
 
         recipeTitleLabel.text = recipe?.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        difficulty.text = recipe?.difficulty.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        serves.text = recipe?.serves.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        duration.text = recipe?.duration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         if recipe?.image != nil {
             self.recipeImage.image = recipe!.image

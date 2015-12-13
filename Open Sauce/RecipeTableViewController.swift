@@ -18,9 +18,10 @@ class RecipeTableViewController: UIViewController , NSFetchedResultsControllerDe
     var refreshControl:UIRefreshControl!
 
     var recipes = [Recipe]()
-    @IBOutlet weak var tableView: UITableView!
-    @IBAction func showMenu(sender: AnyObject) {
-        presentLeftMenuViewController()
+     @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
     
     //# MARK: - NSFetchedResultsController
@@ -90,8 +91,9 @@ class RecipeTableViewController: UIViewController , NSFetchedResultsControllerDe
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(refreshControl)
-        
+        self.collectionView.addSubview(refreshControl)
+        collectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+
         fetchedResultsController.delegate = self
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 131.00/255.0, green: 28.0/255.0, blue: 81.0/255.0, alpha:1.0)
@@ -121,8 +123,8 @@ class RecipeTableViewController: UIViewController , NSFetchedResultsControllerDe
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destinationViewController as! RecipeDetailViewController
             // your new view controller should have property that will store passed value
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)
             let recipe = fetchedResultsController.objectAtIndexPath(indexPath!) as! Recipe
             viewController.recipe = recipe
         
@@ -156,78 +158,26 @@ class RecipeTableViewController: UIViewController , NSFetchedResultsControllerDe
 
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 }
 
-extension RecipeTableViewController: UITableViewDelegate {
-    
-    
-    // MARK: - Table view data source
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        let numRows = fetchedResultsController.fetchedObjects?.count ?? 0
+extension RecipeTableViewController: UICollectionViewDelegate, UICollectionViewDataSource
+{
         
-        if numRows == 0{
-            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            emptyLabel.text = "You currently have no recipes saved"
-            emptyLabel.textAlignment = .Center
-            
-            self.tableView.backgroundView = emptyLabel
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-            return 0
-        } else {
-            return numRows
+        func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+            return 1
         }
-    }
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeListTableViewCell", forIndexPath: indexPath) as! RecipeListTableViewCell
         
+        func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return fetchedResultsController.fetchedObjects?.count ?? 0
+        }
         
-        
-        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
-        cell.recipeTitle?.text = recipe.title
-        cell.activityIndicator.activityIndicatorViewStyle = .WhiteLarge
-        cell.activityIndicator.startAnimating()
-        FudiApi.sharedInstance().getImage(recipe.image_url, completionHandler: {
-            responseCode, data in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let image = UIImage(data: data)
-                FudiApi.Caches.imageCache.storeImage(image, withIdentifier: "recipe-\(recipe.id)" )
-                // Assign image to image view of cell
-                cell.background.image = image
-                cell.activityIndicator.stopAnimating()
-                cell.activityIndicator.hidden = true
-                
-            })
-            }, errorHandler: {
-                error in
-                cell.activityIndicator.stopAnimating()
-                cell.activityIndicator.hidden = true
-        });
-        cell.serves.text = recipe.serves.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        cell.difficulty.text = recipe.difficulty.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        cell.duration.text = recipe.duration.isEmpty ? "no duration": recipe.duration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+        func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("InspirationCell", forIndexPath: indexPath) as! InspirationCell
             let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
-            sharedContext.deleteObject(recipe)
+
+            cell.recipe = recipe
+            return cell
         }
-    }
 }
